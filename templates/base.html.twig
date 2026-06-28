@@ -1,42 +1,51 @@
 <!doctype html>
-<html lang="en" data-layout="vertical" data-topbar="light" data-sidebar="dark" data-sidebar-size="lg" data-sidebar-image="none" data-preloader="disable">
+<html lang="fr">
 <head>
- <meta charset="utf-8" />
-  <title>{{ title is defined ? title|capitalize  ~ ' | ': ''  }} {{ APP_NAME }}</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta content="Boilerplate" name="description" />
-  <meta content="Frédérick AGATHE <agathefrederick@gmail.com>" name="author" />
-  <!-- App favicon -->
-  <link rel="shortcut icon" href="{{ asset(APP_FAVICON) }}" type="image/x-icon">
-  <link rel="icon" href="{{ asset(APP_LOGO) }}" type="image/webp">
-  <link rel="apple-touch-icon" href="{{ asset(APP_LOGO_PNG) }}" type="image/png">
-  <!-- aos css -->
-  <link rel="stylesheet" href="{{ asset('assets/libs/aos/aos.css') }}" />
-  <!-- Layout config Js -->
-  <script src="{{ asset('assets/js/layout.js') }}"></script>
-  <!-- Bootstrap Css -->
-  <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
-  <!-- Icons Css -->
-  <link href="{{ asset('assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
-  <!-- App Css-->
-  <link href="{{ asset('assets/css/app.min.css') }}" rel="stylesheet" type="text/css" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}Portfolio{% endblock %}</title>
+  
+
+  <link rel="icon" href="{{ asset(APP_FAVICON) }}" type="image/x-icon" />
+
+  {# Fonts Google : Inter + DM Mono #}
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=DM+Mono:ital,wght@0,400;0,500;1,400&display=swap"
+    rel="stylesheet"
+  />
+
+  {# CDN Devicons #}
+  <link href="{{ asset('css/icons.css') }}" rel="stylesheet" />
+
   <!-- Custom Css-->
-  <link href="{{ asset('css/custom.css') }}" rel="stylesheet" type="text/css" />
-  {% block head %}{% endblock %}
+  <link rel="stylesheet" href="{{ asset('assets/icons.min.css') }}" type="text/css" />
+
+  {# CSS global #}
+  <link rel="stylesheet" href="{{ asset('css/app.css') }}" />
+
+  {% include 'partials/_seo.html.twig' %}
+
   {% block stylesheets %}{% endblock %}
 </head>
 
-<body {% block body_attributes %}{% endblock %}>
+<body class="{% block body_class %}{% endblock %}">
 
-  {% block body %}{% endblock %}
+  {% block navbar %}
+    {% include 'partials/_navbar.html.twig' ignore missing %}
+  {% endblock %}
 
-  <!-- JAVASCRIPT -->
-  <script src="{{ asset('assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-  <script src="{{ asset('assets/libs/simplebar/simplebar.min.js') }}"></script>
-  <script src="{{ asset('assets/libs/node-waves/waves.min.js') }}"></script>
-  <script src="{{ asset('assets/libs/feather-icons/feather.min.js') }}"></script>
-  <script src="{{ asset('assets/js/pages/plugins/lord-icon-2.1.0.js') }}"></script>
-  <script src="{{ asset('assets/js/plugins.js') }}"></script>
+  <main class="{% block main_class %}{% endblock %}" role="main">
+    {% block body %}{% endblock %}
+  </main>
+
+  {% block footer %}
+    {% include 'partials/_footer.html.twig' ignore missing %}
+  {% endblock %}
+
+  {# JS global #}
+  <script src="{{ asset('js/main.js') }}" defer></script>
   {% block javascripts %}{% endblock %}
 </body>
 </html>

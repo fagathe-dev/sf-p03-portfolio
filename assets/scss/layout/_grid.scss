@@ -1,0 +1,43 @@
+// =============================================================================
+// _grid.scss
+// =============================================================================
+@use 'sass:math';
+@use '../core/variables' as vars;
+@use '../core/mixins' as mixins;
+
+.container {
+  width: 100%;
+  padding-right: calc(var(--bs-gutter-x, 1.5rem) * 0.5);
+  padding-left: calc(var(--bs-gutter-x, 1.5rem) * 0.5);
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: calc(var(--bs-gutter-x, 1.5rem) * -0.5);
+  margin-left: calc(var(--bs-gutter-x, 1.5rem) * -0.5);
+}
+
+.col {
+  flex: 1 0 0%;
+}
+
+@for $i from 1 through vars.$grid-columns {
+  .col-#{$i} {
+    flex: 0 0 auto;
+    width: math.percentage(math.div($i, vars.$grid-columns));
+  }
+}
+
+@each $bp, $value in vars.$breakpoints {
+  @include mixins.bp-up($bp) {
+    @for $i from 1 through vars.$grid-columns {
+      .col-#{$bp}-#{$i} {
+        flex: 0 0 auto;
+        width: math.percentage(math.div($i, vars.$grid-columns));
+      }
+    }
+  }
+}

@@ -1,0 +1,64 @@
+{# --- Projets ------------------------------------------------------------------ #}
+
+<div class="projects">
+  <ul class="projects__grid" aria-label="Liste des projets">
+    {% for project in projects %}
+      <li class="project-card">
+
+        {% if project.thumbnail %}
+          <div class="project-card__thumbnail" aria-hidden="true">
+            <img
+              src="{{ asset(project.thumbnail) }}"
+              alt="{{ project.name }}"
+              class="project-card__img"
+              width="600"
+              height="340"
+              loading="lazy"
+            />
+          </div>
+        {% endif %}
+
+        <div class="project-card__body">
+
+          <div class="project-card__meta">
+            <span class="project-card__date">{{ project.date }}</span>
+          </div>
+
+          <h3 class="project-card__name">{{ project.name }}</h3>
+          <p class="project-card__excerpt">{{ project.excerpt }}</p>
+
+          <ul class="project-card__stack" aria-label="Stack technique de {{ project.name }}">
+            {% for tech in project.stack %}
+              <li class="project-card__tag">{{ tech }}</li>
+            {% endfor %}
+          </ul>
+
+          <div class="project-card__actions">
+            {% if project.github %}
+              <a
+                href="{{ project.github }}"
+                class="btn btn--outline btn--sm"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Voir le code source de {{ project.name }} sur GitHub"
+              >
+                <i class="mdi mdi-github" aria-hidden="true"></i>
+                Code source
+              </a>
+            {% endif %}
+            {% if project.live_link %}
+              <a
+                href="{{ project.live_link }}"
+                class="btn btn--primary btn--sm"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Voir la démo en ligne de {{ project.name }}"
+              >Voir le projet</a>
+            {% endif %}
+          </div>
+
+        </div>
+      </li>
+    {% endfor %}
+  </ul>
+</div>

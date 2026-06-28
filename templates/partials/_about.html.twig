@@ -1,0 +1,42 @@
+{# --- À propos ---------------------------------------------------------------- #}
+
+<div class="about">
+
+  <div class="about__content">
+    <div class="about__bio">{{ profile.bio|raw }}</div>
+
+    <div class="about__actions">
+      <a
+        href="{{ url('app_home_download_resume') }}"
+        class="btn btn--primary"
+        aria-label="Télécharger le CV de {{ profile.fullName }}"
+      >Télécharger le CV</a>
+      <a
+        href="#contact"
+        class="btn btn--outline"
+        aria-label="Aller à la section contact"
+      >Me contacter</a>
+    </div>
+  </div>
+
+  {# ── Chiffres clés ── #}
+  <aside class="about__stats" aria-label="Chiffres clés">
+    <div class="about__stat">
+      <span class="about__stat-value">5+</span>
+      <span class="about__stat-label">Ans d'expérience</span>
+    </div>
+    <div class="about__stat">
+      <span class="about__stat-value">{{ projects|length }}+</span>
+      <span class="about__stat-label">Projets réalisés</span>
+    </div>
+    <div class="about__stat">
+      <span class="about__stat-value">{{ skills|length }}</span>
+      <span class="about__stat-label">Technologies</span>
+    </div>
+    <div class="about__stat">
+      <span class="about__stat-value">{{ profile.location }}</span>
+      <span class="about__stat-label">Localisation</span>
+    </div>
+  </aside>
+
+</div>

@@ -1,0 +1,73 @@
+// =============================================================================
+// _theme.scss
+// =============================================================================
+@use 'variables' as vars;
+
+:root {
+  color-scheme: light;
+
+  --ds-primary: #{vars.$primary};
+  --ds-primary-light: #{vars.$primary-light};
+  --ds-primary-dark: #{vars.$primary-dark};
+
+  --ds-secondary: #{vars.$secondary};
+  --ds-secondary-light: #{vars.$secondary-light};
+  --ds-secondary-dark: #{vars.$secondary-dark};
+
+  --ds-success: #{vars.$success};
+  --ds-success-light: #{vars.$success-light};
+  --ds-success-dark: #{vars.$success-dark};
+  --ds-danger: #{vars.$danger};
+  --ds-danger-light: #{vars.$danger-light};
+  --ds-danger-dark: #{vars.$danger-dark};
+  --ds-warning: #{vars.$warning};
+  --ds-warning-light: #{vars.$warning-light};
+  --ds-warning-dark: #{vars.$warning-dark};
+  --ds-info: #{vars.$info};
+  --ds-info-light: #{vars.$info-light};
+  --ds-info-dark: #{vars.$info-dark};
+
+  --ds-body-bg: #{vars.$body-bg};
+  --ds-body-color: #{vars.$body-color};
+
+  --ds-surface-bg: #{vars.$surface-bg};
+  --ds-surface-bg-raised: #{vars.$surface-bg-raised};
+  --ds-border-color: #{vars.$border-color};
+  --ds-border-width: #{vars.$border-width};
+  --ds-border-radius: #{vars.$border-radius};
+  --ds-border-radius-full: #{vars.$border-radius-full};
+
+  --ds-link-color: #{vars.$link-color};
+  --ds-link-hover-color: #{vars.$link-hover-color};
+
+  --ds-neutral-400: #{vars.$neutral-400};
+  --ds-neutral-500: #{vars.$neutral-500};
+  --ds-neutral-600: #{vars.$neutral-600};
+
+  --ds-font-family: #{vars.$font-family-sans-serif};
+  --ds-font-family-mono: #{vars.$font-family-mono};
+
+  --ds-shadow-sm: #{vars.$shadow-sm};
+  --ds-shadow: #{vars.$shadow};
+  --ds-shadow-md: #{vars.$shadow-md};
+  --ds-shadow-lg: #{vars.$shadow-lg};
+
+  --ds-transition-base: #{vars.$transition-base};
+  --ds-focus-ring-width: #{vars.$focus-ring-width};
+  --ds-focus-ring-offset: #{vars.$focus-ring-offset};
+  --ds-focus-ring-color: #{vars.$primary};
+
+  --ds-z-modal: #{vars.$z-index-modal};
+  --ds-z-toast: #{vars.$z-index-toast};
+}
+
+[data-bs-theme='dark'] {
+  color-scheme: dark;
+  --ds-body-bg: #{vars.$body-bg-dark};
+  --ds-body-color: #{vars.$body-color-dark};
+  --ds-surface-bg: #{vars.$surface-bg-dark};
+  --ds-surface-bg-raised: #{vars.$surface-bg-raised-dark};
+  --ds-border-color: #{vars.$border-color-dark};
+  --ds-link-color: #{vars.$link-color-dark};
+  --ds-link-hover-color: #{vars.$link-hover-color-dark};
+}

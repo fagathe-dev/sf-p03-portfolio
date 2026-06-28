@@ -1,0 +1,33 @@
+// =============================================================================
+// _nav-tabs.scss
+// =============================================================================
+.nav-tabs {
+  display: flex;
+  border-bottom: var(--ds-border-width) solid var(--ds-border-color);
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1rem 0;
+}
+.nav-tabs .nav-item {
+  margin-bottom: calc(-1 * var(--ds-border-width));
+}
+.nav-tabs .nav-link {
+  display: block;
+  padding: 0.75rem 1rem;
+  border: var(--ds-border-width) solid transparent;
+  border-top-left-radius: var(--ds-border-radius);
+  border-top-right-radius: var(--ds-border-radius);
+  text-decoration: none;
+  color: var(--ds-body-color);
+
+  &:hover {
+    border-color: var(--ds-border-color) var(--ds-border-color) transparent;
+  }
+  &.active {
+    color: var(--ds-primary);
+    background-color: var(--ds-body-bg);
+    border-color: var(--ds-border-color) var(--ds-border-color)
+      var(--ds-body-bg);
+    font-weight: bold;
+  }
+}

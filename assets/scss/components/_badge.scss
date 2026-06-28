@@ -1,0 +1,26 @@
+// =============================================================================
+// _badge.scss
+// =============================================================================
+.badge {
+  display: inline-block;
+  padding: 0.25em 0.65em;
+  font-size: 0.75em;
+  font-weight: 600;
+  font-family: var(--ds-font-family-mono);
+  text-transform: uppercase;
+  color: var(--ds-body-color);
+  background-color: var(--ds-surface-bg-raised);
+  border: var(--ds-border-width) solid var(--ds-border-color);
+  border-radius: var(--ds-border-radius-full);
+}
+
+.badge-primary {
+  background-color: var(--ds-primary-light);
+  color: var(--ds-primary-dark);
+  border-color: var(--ds-primary);
+}
+.badge-secondary {
+  background-color: var(--ds-secondary-light);
+  color: var(--ds-secondary-dark);
+  border-color: var(--ds-secondary);
+}

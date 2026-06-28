@@ -1,0 +1,61 @@
+{# --- Parcours ----------------------------------------------------------------- #}
+
+<ol class="timeline" aria-label="Parcours professionnel et formations">
+  {% for item in timeline %}
+    <li class="timeline__item timeline__item--{{ item.type }}">
+
+      <div class="timeline__marker" aria-hidden="true">
+        {% if item.type == 'experience' %}
+          <i class="mdi mdi-briefcase" aria-hidden="true"></i>
+        {% else %}
+          <i class="mdi mdi-school" aria-hidden="true"></i>
+        {% endif %}
+      </div>
+
+      <div class="timeline__content">
+
+        <header class="timeline__header">
+          <span class="timeline__type-badge">
+            {{ item.type == 'experience' ? 'Expérience' : 'Formation' }}
+          </span>
+          <span class="timeline__dates">
+            {{ item.startDate|slice(5, 2) }}/{{ item.startDate|slice(0, 4) }}
+            {% if item.endDate %}
+              — {{ item.endDate|slice(5, 2) }}/{{ item.endDate|slice(0, 4) }}
+            {% else %}
+              — Présent
+            {% endif %}
+          </span>
+        </header>
+
+        <h3 class="timeline__title">{{ item.title }}</h3>
+
+        <p class="timeline__org">
+          <span>{{ item.organization }}</span>
+          <span class="timeline__location">{{ item.location }}</span>
+        </p>
+
+        {% if item.description %}
+          <p class="timeline__description">{{ item.description }}</p>
+        {% endif %}
+
+        {% if item.highlights %}
+          <ul class="timeline__highlights" aria-label="Points clés">
+            {% for highlight in item.highlights %}
+              <li class="timeline__highlight">{{ highlight }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+
+        {% if item.stack %}
+          <ul class="timeline__stack" aria-label="Technologies utilisées">
+            {% for tech in item.stack %}
+              <li class="timeline__stack-tag">{{ tech }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+
+      </div>
+    </li>
+  {% endfor %}
+</ol>

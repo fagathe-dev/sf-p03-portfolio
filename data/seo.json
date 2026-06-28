@@ -1,0 +1,94 @@
+{
+  "homepage": {
+    "meta": [
+      {
+        "name": "description",
+        "content": "Fabien Gathe — Développeur Web Full-Stack spécialisé Symfony & TypeScript. Découvrez mon portfolio, mes projets et mes compétences."
+      },
+      {
+        "name": "author",
+        "content": "Fabien Gathe"
+      },
+      {
+        "name": "keywords",
+        "content": "Fabien Gathe, développeur web, portfolio, Symfony, TypeScript, PHP, full-stack, développeur web France"
+      },
+      {
+        "name": "google-site-verification",
+        "content": "{{ GOOGLE_SITE_VERIFICATION }}"
+      },
+      {
+        "name": "msvalidate.01",
+        "content": "{{ BING_SITE_VERIFICATION }}"
+      },
+      {
+        "name": "theme-color",
+        "content": "#4A5240"
+      }
+    ],
+    "og": [
+      {
+        "property": "og:type",
+        "content": "website",
+        "is_url": false
+      },
+      {
+        "property": "og:title",
+        "content": "Fabien Gathe — Développeur Web Full-Stack",
+        "is_url": false
+      },
+      {
+        "property": "og:description",
+        "content": "Développeur Web Full-Stack spécialisé Symfony & TypeScript. Découvrez mon portfolio, mes projets et mes compétences.",
+        "is_url": false
+      },
+      {
+        "property": "og:locale",
+        "content": "fr_FR",
+        "is_url": false
+      },
+      {
+        "property": "og:url",
+        "content": "",
+        "is_url": true,
+        "url_type": "current"
+      },
+      {
+        "property": "og:image",
+        "content": "/assets/images/avatar.webp",
+        "is_url": true,
+        "url_type": "asset"
+      }
+    ],
+    "twitter": [
+      {
+        "name": "twitter:card",
+        "content": "summary_large_image",
+        "is_url": false
+      },
+      {
+        "name": "twitter:title",
+        "content": "Fabien Gathe — Développeur Web Full-Stack",
+        "is_url": false
+      },
+      {
+        "name": "twitter:description",
+        "content": "Développeur Web Full-Stack spécialisé Symfony & TypeScript. Découvrez mon portfolio, mes projets et mes compétences.",
+        "is_url": false
+      },
+      {
+        "name": "twitter:image",
+        "content": "/assets/images/avatar.webp",
+        "is_url": true,
+        "url_type": "asset"
+      }
+    ],
+    "links": [
+      {
+        "rel": "canonical",
+        "is_url": true,
+        "url_type": "current"
+      }
+    ]
+  }
+}

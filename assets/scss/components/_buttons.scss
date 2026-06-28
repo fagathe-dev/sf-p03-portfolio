@@ -1,0 +1,50 @@
+// =============================================================================
+// _buttons.scss
+// =============================================================================
+@use '../core/mixins' as mixins;
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--ds-font-family-mono);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.875rem;
+  padding: 0.75rem 1.5rem;
+  border: var(--ds-border-width) solid var(--ds-border-color);
+  background: transparent;
+  color: var(--ds-body-color);
+  cursor: pointer;
+  transition: var(--ds-transition-base);
+  text-decoration: none;
+
+  &:hover {
+    background: var(--ds-surface-bg);
+  }
+  &:focus-visible {
+    @include mixins.focus-ring;
+  }
+}
+
+.btn-primary {
+  background: var(--ds-primary);
+  border-color: var(--ds-primary);
+  color: #fff;
+  &:hover {
+    background: var(--ds-primary-dark);
+    border-color: var(--ds-primary-dark);
+    color: #fff;
+  }
+}
+
+.btn-secondary {
+  background: var(--ds-secondary);
+  border-color: var(--ds-secondary);
+  color: #fff;
+  &:hover {
+    background: var(--ds-secondary-dark);
+    border-color: var(--ds-secondary-dark);
+    color: #fff;
+  }
+}

@@ -1,0 +1,28 @@
+// =============================================================================
+// _toaster.scss
+// =============================================================================
+.toast-container {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  z-index: var(--ds-z-toast);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.toast {
+  width: 300px;
+  background-color: var(--ds-surface-bg);
+  border: var(--ds-border-width) solid var(--ds-border-color);
+  box-shadow: var(--ds-shadow-md);
+}
+.toast-header {
+  padding: 0.5rem 0.75rem;
+  border-bottom: var(--ds-border-width) solid var(--ds-border-color);
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+}
+.toast-body {
+  padding: 0.75rem;
+}

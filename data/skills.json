@@ -1,0 +1,98 @@
+[
+  {
+    "id": "skl-1",
+    "label": "Symfony",
+    "icon": "devicon-symfony-original",
+    "category": "back_end",
+    "level": "expert",
+    "isHighlight": true
+  },
+  {
+    "id": "skl-2",
+    "label": "PHP",
+    "icon": "devicon-php-plain",
+    "category": "back_end",
+    "level": "expert",
+    "isHighlight": true
+  },
+  {
+    "id": "skl-3",
+    "label": "TypeScript",
+    "icon": "devicon-typescript-plain",
+    "category": "front_end",
+    "level": "senior",
+    "isHighlight": true
+  },
+  {
+    "id": "skl-4",
+    "label": "SCSS / Sass",
+    "icon": "devicon-sass-original",
+    "category": "front_end",
+    "level": "confirme",
+    "isHighlight": false
+  },
+  {
+    "id": "skl-5",
+    "label": "HTML5",
+    "icon": "devicon-html5-plain",
+    "category": "front_end",
+    "level": "expert",
+    "isHighlight": false
+  },
+  {
+    "id": "skl-6",
+    "label": "CSS3",
+    "icon": "devicon-css3-plain",
+    "category": "front_end",
+    "level": "senior",
+    "isHighlight": false
+  },
+  {
+    "id": "skl-7",
+    "label": "Doctrine ORM",
+    "icon": "devicon-doctrine-plain",
+    "category": "back_end",
+    "level": "confirme",
+    "isHighlight": false
+  },
+  {
+    "id": "skl-8",
+    "label": "MySQL",
+    "icon": "devicon-mysql-plain",
+    "category": "back_end",
+    "level": "confirme",
+    "isHighlight": false
+  },
+  {
+    "id": "skl-9",
+    "label": "PostgreSQL",
+    "icon": "devicon-postgresql-plain",
+    "category": "back_end",
+    "level": "intermediaire",
+    "isHighlight": false
+  },
+  {
+    "id": "skl-10",
+    "label": "Git",
+    "icon": "devicon-git-plain",
+    "category": "other",
+    "level": "senior",
+    "isHighlight": true
+  },
+  {
+    "id": "skl-11",
+    "label": "Docker",
+    "icon": "devicon-docker-plain",
+    "category": "other",
+    "level": "intermediaire",
+    "isHighlight": false
+  },
+  {
+    "id": "skl-12",
+    "label": "Twig",
+    "icon": "devicon-html5-plain",
+    "category": "front_end",
+    "level": "expert",
+    "isHighlight": false
+  }
+]

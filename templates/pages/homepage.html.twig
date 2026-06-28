@@ -1,0 +1,207 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ profile.fullName }} — Développeur Web Full-Stack{% endblock %}
+
+{% block meta_description %}{{ profile.tagline|striptags }}{% endblock %}
+
+{# ── Navbar fixe homepage (avec modificateur --home) ─────────────────────── #}
+{% block navbar %}
+  <header class="navbar navbar--home" id="navbar" role="banner">
+    <div class="navbar__inner">
+
+      <a href="#hero" class="navbar__brand" aria-label="Retour en haut de page">
+        <img src="{{ asset(APP_LOGO) }}" alt="Logo de mon portfolio" srcset="{{ asset(APP_LOGO) }}" title="Logo de mon portfolio" width="48" height="48" />
+      </a>
+
+      <nav class="navbar__links" aria-label="Navigation principale">
+        <a href="#about" class="navbar__link">À propos</a>
+        <a href="#skills" class="navbar__link">Compétences</a>
+        <a href="#projects" class="navbar__link">Projets</a>
+        <a href="#timeline" class="navbar__link">Parcours</a>
+        <a href="#contact" class="navbar__link">Contact</a>
+      </nav>
+
+      <div class="navbar__actions">
+        <a
+          href="{{ url('app_home_download_resume') }}"
+          class="btn btn--outline"
+          aria-label="Télécharger le CV de {{ profile.fullName }}"
+        >Télécharger CV</a>
+
+        <button
+          id="navbar-burger"
+          class="navbar__burger"
+          type="button"
+          aria-label="Ouvrir le menu de navigation"
+          aria-expanded="false"
+          aria-controls="navbar-menu-mobile"
+        >
+          <span class="navbar__burger-bar" aria-hidden="true"></span>
+          <span class="navbar__burger-bar" aria-hidden="true"></span>
+          <span class="navbar__burger-bar" aria-hidden="true"></span>
+        </button>
+      </div>
+
+    </div>
+
+    <nav
+      id="navbar-menu-mobile"
+      class="navbar__menu-mobile"
+      aria-label="Navigation mobile"
+      aria-hidden="true"
+    >
+      <a href="#about" class="navbar__mobile-link">À propos</a>
+      <a href="#skills" class="navbar__mobile-link">Compétences</a>
+      <a href="#projects" class="navbar__mobile-link">Projets</a>
+      <a href="#timeline" class="navbar__mobile-link">Parcours</a>
+      <a href="#contact" class="navbar__mobile-link">Contact</a>
+      <a
+        href="{{ url('app_home_download_resume') }}"
+        class="btn btn--outline"
+        aria-label="Télécharger le CV de {{ profile.fullName }}"
+      >Télécharger CV</a>
+    </nav>
+  </header>
+{% endblock %}
+
+{# ── Contenu principal ────────────────────────────────────────────────────── #}
+{% block body %}
+
+  {# ── Hero ──────────────────────────────────────────────────────────────── #}
+  <section class="hero" id="hero" aria-labelledby="hero-name">
+    <div class="hero__inner">
+
+      <div class="hero__content">
+
+        <span class="hero__badge" aria-label="Disponible pour de nouvelles opportunités">
+          <span class="hero__badge-dot" aria-hidden="true"></span>
+          Disponible
+        </span>
+
+        <h1 class="hero__name" id="hero-name">{{ profile.fullName }}</h1>
+        <p class="hero__title">{{ profile.title }}</p>
+        <p class="hero__tagline">{{ profile.tagline|raw }}</p>
+
+        <p class="hero__location">
+          <span aria-hidden="true">📍</span>
+          <span>{{ profile.location }}</span>
+        </p>
+
+        <div class="hero__ctas">
+          <a href="#contact" class="btn btn--primary">Me contacter</a>
+          <a
+            href="{{ url('app_home_download_resume') }}"
+            class="btn btn--outline"
+            aria-label="Télécharger le CV de {{ profile.fullName }}"
+          >Télécharger CV</a>
+        </div>
+
+        <ul class="hero__socials" aria-label="Réseaux sociaux">
+          {% for social in profile.socials %}
+            <li>
+              <a
+                href="{{ social.link }}"
+                class="hero__social-link"
+                aria-label="{{ social.name }}"
+                {% if not (social.link starts with 'mailto') %}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                {% endif %}
+              ><i class="{{ social.icon }}" aria-hidden="true"></i></a>
+            </li>
+          {% endfor %}
+        </ul>
+
+      </div>
+
+      <div class="hero__visual">
+        <div class="hero__avatar-wrapper">
+          <img
+            src="{{ asset(profile.avatar) }}"
+            alt="Photo de {{ profile.fullName }}"
+            class="hero__avatar"
+            width="280"
+            height="280"
+            loading="eager"
+          />
+        </div>
+      </div>
+
+    </div>
+
+    <a href="#about" class="hero__scroll-hint" aria-label="Défiler vers la section À propos">
+      <span class="hero__scroll-line" aria-hidden="true"></span>
+    </a>
+  </section>
+
+  {# ── À propos ──────────────────────────────────────────────────────────── #}
+  <section class="section" id="about" aria-labelledby="about-title">
+    <div class="section__inner">
+      <h2 class="section__title" id="about-title">À propos</h2>
+      {% include 'partials/_about.html.twig' %}
+    </div>
+  </section>
+
+  {# ── Compétences ───────────────────────────────────────────────────────── #}
+  <section class="section section--alt" id="skills" aria-labelledby="skills-title">
+    <div class="section__inner">
+      <h2 class="section__title" id="skills-title">Compétences</h2>
+      {% include 'partials/_skills.html.twig' %}
+    </div>
+  </section>
+
+  {# ── Projets ───────────────────────────────────────────────────────────── #}
+  <section class="section" id="projects" aria-labelledby="projects-title">
+    <div class="section__inner">
+      <h2 class="section__title" id="projects-title">Projets</h2>
+      {% include 'partials/_projects.html.twig' %}
+    </div>
+  </section>
+
+  {# ── Parcours ──────────────────────────────────────────────────────────── #}
+  <section class="section section--alt" id="timeline" aria-labelledby="timeline-title">
+    <div class="section__inner">
+      <h2 class="section__title" id="timeline-title">Parcours</h2>
+      {% include 'partials/_timeline.html.twig' %}
+    </div>
+  </section>
+
+  {# ── Contact ───────────────────────────────────────────────────────────── #}
+  <section class="section" id="contact" aria-labelledby="contact-title">
+    <div class="section__inner">
+      <h2 class="section__title" id="contact-title">Contact</h2>
+      {% block section_contact %}
+        {% include 'partials/_contact.html.twig' %}
+      {% endblock %}
+    </div>
+  </section>
+
+{% endblock %}
+
+{# ── Footer ───────────────────────────────────────────────────────────────── #}
+{% block footer %}
+  <footer class="footer" role="contentinfo">
+    <div class="footer__inner">
+      <p class="footer__copy">&copy; {{ "now"|date("Y") }} {{ profile.fullName }}</p>
+      <ul class="footer__socials" aria-label="Réseaux sociaux">
+        {% for social in profile.socials %}
+          <li>
+            <a
+              href="{{ social.link }}"
+              class="hero__social-link"
+              aria-label="{{ social.name }}"
+            {% if not (social.link starts with 'mailto') %}
+              target="_blank"
+              rel="noopener noreferrer"
+            {% endif %}
+            ><i class="{{ social.icon }}" aria-hidden="true"></i></a>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </footer>
+{% endblock %}
+
+{% block javascripts %}
+  <script src="{{ asset('js/pages/homepage.js') }}" defer></script>
+{% endblock %}

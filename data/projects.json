@@ -1,0 +1,62 @@
+[
+  {
+    "id": "pjt-1",
+    "slug": "pjt-1",
+    "name": "Portfolio Symfony",
+    "thumbnail": "/assets/img/projects/pjt-1.webp",
+    "stack": ["Symfony", "PHP 8.3", "TypeScript", "SCSS", "Twig"],
+    "description": "Mon portfolio personnel développé avec <strong>Symfony 8</strong> et <strong>TypeScript</strong>. L'application charge ses données depuis des fichiers JSON plats et les hydrate via un service de réflexion PHP maison. Le rendu côté serveur est assuré par Twig, avec une couche TypeScript pour les interactions dynamiques. Le SCSS est compilé via un pipeline Node.js personnalisé, sans dépendance à Webpack Encore.",
+    "excerpt": "Portfolio personnel full-stack Symfony 8 avec hydratation JSON par réflexion PHP.",
+    "date": "06/2025",
+    "github": "https://github.com/fagathe-dev/sf-portfolio",
+    "live_link": "https://fabiengathe.dev"
+  },
+  {
+    "id": "pjt-2",
+    "slug": "pjt-2",
+    "name": "API REST Gestion de Tâches",
+    "thumbnail": "/assets/img/projects/pjt-2.webp",
+    "stack": ["Symfony", "API Platform", "JWT", "PostgreSQL", "Docker"],
+    "description": "API REST construite avec <strong>API Platform</strong> et sécurisée par <strong>JWT</strong>. Gestion complète des utilisateurs, projets et tâches avec système de permissions par rôles. Les tests d'intégration couvrent l'ensemble des endpoints via PHPUnit et des fixtures Doctrine. Le projet est dockerisé avec des conteneurs séparés pour l'application, la base de données et le reverse proxy Nginx.",
+    "excerpt": "API REST sécurisée JWT pour la gestion de tâches, construite avec API Platform.",
+    "date": "03/2025",
+    "github": "https://github.com/fagathe-dev/task-manager-api",
+    "live_link": null
+  },
+  {
+    "id": "pjt-3",
+    "slug": "pjt-3",
+    "name": "Application E-commerce",
+    "thumbnail": "/assets/img/projects/pjt-3.webp",
+    "stack": ["Symfony", "Stripe", "TypeScript", "MySQL", "Twig", "SCSS"],
+    "description": "Boutique en ligne complète avec gestion de catalogue, panier, paiement via <strong>Stripe</strong> et espace client. Intégration des webhooks Stripe pour la gestion des événements de paiement. Interface d'administration personnalisée pour la gestion des produits et des commandes. Envoi automatique des confirmations de commande par email via Symfony Mailer.",
+    "excerpt": "Boutique e-commerce Symfony avec intégration Stripe et espace client complet.",
+    "date": "11/2024",
+    "github": "https://github.com/fagathe-dev/sf-ecommerce",
+    "live_link": "https://demo-shop.fabiengathe.dev"
+  },
+  {
+    "id": "pjt-4",
+    "slug": "pjt-4",
+    "name": "Dashboard Analytics",
+    "thumbnail": null,
+    "stack": ["TypeScript", "Chart.js", "SCSS", "Webpack"],
+    "description": "Dashboard de visualisation de données entièrement côté client, développé en <strong>TypeScript</strong> vanilla sans framework. Utilise <strong>Chart.js</strong> pour les graphiques interactifs (barres, lignes, camemberts). Les données sont chargées dynamiquement depuis une API externe. Architecture modulaire avec des composants TypeScript réutilisables. Le build est géré par Webpack avec tree-shaking et code splitting.",
+    "excerpt": "Dashboard TypeScript vanilla avec visualisations Chart.js et chargement dynamique.",
+    "date": "08/2024",
+    "github": "https://github.com/fagathe-dev/ts-dashboard",
+    "live_link": null
+  },
+  {
+    "id": "pjt-5",
+    "slug": "pjt-5",
+    "name": "Système de Blog Headless",
+    "thumbnail": "/assets/img/projects/pjt-5.webp",
+    "stack": ["Symfony", "API Platform", "Next.js", "TypeScript", "PostgreSQL"],
+    "description": "Architecture headless avec un backend <strong>Symfony / API Platform</strong> exposant une API REST et un frontend <strong>Next.js</strong> en TypeScript. Le contenu est géré via une interface d'administration Symfony. Le rendu des articles exploite le SSG (Static Site Generation) de Next.js pour des performances optimales. Gestion des médias via un service d'upload personnalisé avec validation et redimensionnement automatique.",
+    "excerpt": "Blog headless Symfony + Next.js avec génération statique et gestion des médias.",
+    "date": "05/2024",
+    "github": null,
+    "live_link": "https://blog-demo.fabiengathe.dev"
+  }
+]

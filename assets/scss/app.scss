@@ -1,0 +1,40 @@
+// =============================================================================
+// app.scss - Point d'entrée de l'application (Architecture "Flemme Intelligente")
+// Portfolio Jimmy
+// =============================================================================
+
+// 1. Core
+@use 'core/variables';
+@use 'core/mixins';
+@use 'core/theme';
+
+// 2. Layout & Utilities
+@use 'layout/grid';
+@use 'layout/utilities';
+
+// 3. Components
+@use 'components/typography';
+@use 'components/buttons';
+@use 'components/forms'; // Injecte les styles Bootstrap 5 pour Symfony Forms
+@use 'components/card';
+@use 'components/badge';
+@use 'components/alert';
+@use 'components/navbar';
+@use 'components/nav_tabs';
+@use 'components/modal';
+@use 'components/list_group';
+@use 'components/breadcrumb';
+@use 'components/toaster';
+@use 'components/image';
+
+// 4. Pages
+@use 'pages/homepage';
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  box-sizing: border-box;
+}

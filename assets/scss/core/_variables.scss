@@ -1,0 +1,195 @@
+// =============================================================================
+// _variables.scss
+// Tokens bruts du Design System.
+// =============================================================================
+
+// Neutral (Secondary)
+$neutral-50: #fafafa !default;
+$neutral-100: #f5f5f5 !default;
+$neutral-200: #e5e5e5 !default;
+$neutral-300: #d4d4d4 !default;
+$neutral-400: #a1a1a1 !default;
+$neutral-500: #737373 !default;
+$neutral-600: #525252 !default;
+$neutral-700: #404040 !default;
+$neutral-800: #262626 !default;
+$neutral-900: #171717 !default;
+$neutral-950: #0a0a0a !default;
+
+// Olive (Primary)
+$olive-50: #fbfbf9 !default;
+$olive-100: #f4f4f0 !default;
+$olive-200: #e8e8e3 !default;
+$olive-300: #d8d8d0 !default;
+$olive-400: #abab9c !default;
+$olive-500: #7c7c67 !default;
+$olive-600: #5b5b4b !default;
+$olive-700: #474739 !default;
+$olive-800: #2b2b22 !default;
+$olive-900: #1d1d16 !default;
+$olive-950: #0c0c09 !default;
+
+// Green (Success)
+$green-50: #f0fdf4 !default;
+$green-600: #16a34a !default;
+$green-800: #166534 !default;
+
+// Red (Danger)
+$red-50: #fef2f2 !default;
+$red-600: #dc2626 !default;
+$red-800: #991b1b !default;
+
+// Amber (Warning)
+$amber-50: #fffbeb !default;
+$amber-500: #f59e0b !default;
+$amber-700: #b45309 !default;
+
+// Sky (Info)
+$sky-50: #f0f9ff !default;
+$sky-500: #0ea5e9 !default;
+$sky-700: #0369a1 !default;
+
+// --- Sémantique ---
+$primary: $olive-800 !default;
+$primary-light: $olive-100 !default;
+$primary-dark: $olive-950 !default;
+
+$secondary: $neutral-800 !default;
+$secondary-light: $neutral-100 !default;
+$secondary-dark: $neutral-950 !default;
+
+$success: $green-600 !default;
+$success-light: $green-50 !default;
+$success-dark: $green-800 !default;
+
+$danger: $red-600 !default;
+$danger-light: $red-50 !default;
+$danger-dark: $red-800 !default;
+
+$warning: $amber-500 !default;
+$warning-light: $amber-50 !default;
+$warning-dark: $amber-700 !default;
+
+$info: $sky-500 !default;
+$info-light: $sky-50 !default;
+$info-dark: $sky-700 !default;
+
+$light: $neutral-100 !default;
+$dark: $neutral-900 !default;
+
+// Body & Surfaces
+$body-bg: $neutral-50 !default;
+$body-color: $neutral-800 !default;
+$body-bg-dark: $neutral-950 !default;
+$body-color-dark: $neutral-100 !default;
+
+$link-color: $olive-800 !default;
+$link-hover-color: $olive-950 !default;
+$link-color-dark: $olive-300 !default;
+$link-hover-color-dark: $olive-100 !default;
+
+$border-color: $neutral-200 !default;
+$border-color-dark: $neutral-700 !default;
+$border-width: 1px !default;
+
+// Style brut : des arrondis très légers
+$border-radius: 0.125rem !default;
+$border-radius-sm: 0.125rem !default;
+$border-radius-lg: 0.25rem !default;
+$border-radius-xl: 0.5rem !default;
+$border-radius-2xl: 0.75rem !default;
+$border-radius-pill: 50rem !default;
+$border-radius-full: 9999px !default;
+
+$surface-bg: $neutral-50 !default;
+$surface-bg-raised: #ffffff !default;
+$surface-bg-dark: $neutral-900 !default;
+$surface-bg-raised-dark: $neutral-800 !default;
+
+// Typography
+$font-family-sans-serif:
+  system-ui,
+  -apple-system,
+  sans-serif !default;
+$font-family-mono: ui-monospace, SFMono-Regular, monospace !default;
+
+$font-size-base: 1rem !default;
+$font-size-xs: 0.75rem !default;
+$font-size-sm: 0.875rem !default;
+$font-size-lg: 1.125rem !default;
+$font-size-xl: 1.25rem !default;
+$font-size-2xl: 1.5rem !default;
+$font-size-3xl: 1.875rem !default;
+$font-size-4xl: 2.25rem !default;
+
+$font-weight-light: 300 !default;
+$font-weight-normal: 400 !default;
+$font-weight-medium: 500 !default;
+$font-weight-semibold: 600 !default;
+$font-weight-bold: 700 !default;
+
+$line-height-tight: 1.25 !default;
+$line-height-snug: 1.375 !default;
+$line-height-base: 1.6 !default;
+$line-height-relaxed: 1.75 !default;
+
+// Heading sizes
+$h1-font-size: 2.5rem !default;
+$h2-font-size: 2rem !default;
+$h3-font-size: 1.75rem !default;
+$h4-font-size: 1.5rem !default;
+$h5-font-size: 1.25rem !default;
+$h6-font-size: 1rem !default;
+
+// Spacing
+$spacer: 1rem !default;
+$spacers: (
+  0: 0,
+  1: 0.25rem,
+  2: 0.5rem,
+  3: 0.75rem,
+  4: 1rem,
+  5: 1.25rem,
+  6: 1.5rem,
+  8: 2rem,
+  10: 2.5rem,
+  12: 3rem,
+  16: 4rem,
+  20: 5rem,
+) !default;
+
+// Breakpoints
+$breakpoints: (
+  'sm': 576px,
+  'md': 768px,
+  'lg': 992px,
+  'xl': 1200px,
+  'xxl': 1400px,
+) !default;
+
+$grid-columns: 12 !default;
+$grid-gutter-width: 1.5rem !default;
+
+// Shadows (Brutalist = plus sharp, moins flou)
+$shadow-sm: 2px 2px 0px 0px rgb(0 0 0 / 0.8) !default;
+$shadow: 4px 4px 0px 0px rgb(0 0 0 / 0.8) !default;
+$shadow-md: 6px 6px 0px 0px rgb(0 0 0 / 0.8) !default;
+$shadow-lg: 8px 8px 0px 0px rgb(0 0 0 / 0.8) !default;
+$shadow-xl: 12px 12px 0px 0px rgb(0 0 0 / 0.9) !default;
+$shadow-2xl: 16px 16px 0px 0px rgb(0 0 0 / 0.9) !default;
+$shadow-none: none !default;
+
+$transition-duration-fast: 150ms !default;
+$transition-duration-base: 200ms !default;
+$transition-duration-slow: 300ms !default;
+$transition-easing: cubic-bezier(0.4, 0, 0.2, 1) !default;
+$transition-base: all $transition-duration-base $transition-easing !default;
+
+$z-index-dropdown: 1000 !default;
+$z-index-sticky: 1020 !default;
+$z-index-fixed: 1030 !default;
+$z-index-modal: 1050 !default;
+$z-index-toast: 1090 !default;
+
+$focus-ring-width: 2px !default;
+$focus-ring-offset: 2px !default;

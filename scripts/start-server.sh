@@ -1,24 +1,22 @@
 #!/usr/bin/env bash
-app_dir='/Users/fagathe/workspace/perso/sf-p04-boilerplate'
-app_host='dev.sf-p04-boilerplate.fagathe-dev.fr'
-port='9600'
-db_driver='mysql'
+app_dir='/Users/fagathe/workspace/perso/sf-p03-portfolio'
+app_host='dev.sf-p03-portfolio.fagathe-dev.fr'
+port='9050'
 
-# enregistrer le nouveau nom de domaine dans le host de la machine
-# echo "127.0.0.1\t${app_host}" | sudo tee -a /etc/hosts
+# Le script de démarrage de base de données est supprimé.
+# SQLite se gère tout seul au moment où PHP lit/écrit dans le fichier.
 
-echo "lance le service ${db_driver}"
-brew services start $db_driver
 cd $app_dir
 echo 'cd api dir'
+
 echo 'ouvrir le projet sur vscode'
 code .
+
 bin/console c:c -n
+
 echo "open http://${app_host}:${port} in browser"
-# open http://$app_host:$port
-            
+
 # lance le serveur interne de php
 php -S $app_host:$port -t public
 
-# stop le service mysql lorsqu'on stop le script
-trap "brew services stop ${db_driver}" EXIT
+# La ligne "trap" de fin est également supprimée, il n'y a plus de service à éteindre.

@@ -1,0 +1,32 @@
+// =============================================================================
+// _alert.scss
+// =============================================================================
+.alert {
+  position: relative;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1rem;
+  border: var(--ds-border-width) solid transparent;
+  border-radius: var(--ds-border-radius);
+  font-weight: 500;
+}
+
+.alert-primary {
+  background-color: var(--ds-primary-light);
+  color: var(--ds-primary-dark);
+  border-color: var(--ds-primary);
+}
+.alert-success {
+  background-color: var(--ds-success-light);
+  color: var(--ds-success-dark);
+  border-color: var(--ds-success);
+}
+.alert-danger {
+  background-color: var(--ds-danger-light);
+  color: var(--ds-danger-dark);
+  border-color: var(--ds-danger);
+}
+.alert-warning {
+  background-color: var(--ds-warning-light);
+  color: var(--ds-warning-dark);
+  border-color: var(--ds-warning);
+}

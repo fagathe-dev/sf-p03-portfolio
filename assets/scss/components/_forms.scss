@@ -1,0 +1,100 @@
+// =============================================================================
+// _forms.scss (Spécial Symfony Forms / Bootstrap 5 Theme)
+// =============================================================================
+@use '../core/mixins' as mixins;
+
+// 1. Labels générés par Symfony
+.form-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  font-family: var(--ds-font-family-mono);
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  color: var(--ds-body-color);
+}
+
+// 2. Champs de saisie
+.form-control,
+.form-select {
+  display: block;
+  width: 100%;
+  padding: 0.75rem;
+  font-family: var(--ds-font-family);
+  font-size: 1rem;
+  color: var(--ds-body-color);
+  background-color: var(--ds-surface-bg);
+  border: var(--ds-border-width) solid var(--ds-border-color);
+  border-radius: 0; // Style brut
+  transition: var(--ds-transition-base);
+
+  &:focus {
+    border-color: var(--ds-primary);
+    @include mixins.focus-ring;
+  }
+
+  // État d'erreur Symfony
+  &.is-invalid {
+    border-color: var(--ds-danger);
+    &:focus {
+      outline-color: var(--ds-danger);
+      box-shadow: 0 0 0 var(--ds-focus-ring-width) rgba(220, 38, 38, 0.25);
+    }
+  }
+}
+
+textarea.form-control {
+  min-height: 120px;
+  resize: vertical;
+}
+
+// 3. Checkboxes & Radios
+.form-check {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.form-check-input {
+  width: 1.25rem;
+  height: 1.25rem;
+  border: var(--ds-border-width) solid var(--ds-border-color);
+  cursor: pointer;
+  appearance: none;
+  background-color: var(--ds-surface-bg);
+  margin-top: 0;
+
+  &:checked {
+    background-color: var(--ds-primary);
+    border-color: var(--ds-primary);
+  }
+  &:focus {
+    @include mixins.focus-ring;
+  }
+
+  // État d'erreur sur les checkbox
+  &.is-invalid {
+    border-color: var(--ds-danger);
+  }
+}
+
+.form-check-input[type='radio'] {
+  border-radius: 50%;
+}
+
+// 4. Messages d'erreurs générés par Symfony
+.invalid-feedback {
+  display: none;
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 0.75rem;
+  font-family: var(--ds-font-family-mono);
+  color: var(--ds-danger);
+  font-weight: 600;
+}
+
+// Affiche l'erreur si le champ précédent est invalide
+.is-invalid ~ .invalid-feedback {
+  display: block;
+}

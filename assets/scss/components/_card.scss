@@ -1,0 +1,34 @@
+// =============================================================================
+// _card.scss
+// =============================================================================
+.card {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--ds-surface-bg);
+  border: var(--ds-border-width) solid var(--ds-border-color);
+  border-radius: var(--ds-border-radius);
+  transition: var(--ds-transition-base);
+
+  &:hover {
+    box-shadow: var(--ds-shadow);
+    transform: translateY(-2px);
+  }
+}
+
+.card-body {
+  padding: 1.5rem;
+  flex: 1 1 auto;
+}
+.card-title {
+  margin-bottom: 0.75rem;
+  font-size: 1.25rem;
+}
+.card-text {
+  margin-bottom: 1rem;
+  color: var(--ds-neutral-600);
+}
+.card-footer {
+  padding: 1rem 1.5rem;
+  border-top: var(--ds-border-width) solid var(--ds-border-color);
+  background-color: var(--ds-surface-bg-raised);
+}

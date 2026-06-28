@@ -1,0 +1,26 @@
+{
+  "fullName": "Fabien Gathe",
+  "title": "Développeur Web Full-Stack",
+  "tagline": "Je conçois des applications web <strong>robustes et élégantes</strong>, de la base de données à l'interface utilisateur.",
+  "bio": "Passionné par le développement web depuis plusieurs années, je me spécialise dans l'écosystème <strong>Symfony</strong> côté serveur et <strong>TypeScript</strong> côté client. J'accorde une attention particulière à la <em>qualité du code</em>, aux bonnes pratiques et à l'expérience utilisateur. Toujours curieux, j'aime explorer de nouvelles technologies et relever des défis techniques ambitieux.",
+  "avatar": "/images/auth-cover.png",
+  "cv": "/assets/files/cv-fabien-gathe.pdf",
+  "location": "France",
+  "socials": [
+    {
+      "name": "GitHub",
+      "icon": "mdi mdi-github",
+      "link": "https://github.com/fagathe-dev"
+    },
+    {
+      "name": "LinkedIn",
+      "icon": "mdi mdi-linkedin",
+      "link": "https://linkedin.com/in/fabien-gathe"
+    },
+    {
+      "name": "Email",
+      "icon": "mdi mdi-email",
+      "link": "mailto:contact@fabiengathe.dev"
+    }
+  ]
+}

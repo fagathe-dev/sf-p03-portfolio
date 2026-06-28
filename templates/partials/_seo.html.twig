@@ -1,0 +1,57 @@
+{# templates/partials/_seo.html.twig
+   Insérer dans le <head> de base.html.twig : {% include 'partials/_seo.html.twig' %}
+   
+   Variables Twig globales requises (twig.yaml) :
+     DEFAULT_URI : valeur de DEFAULT_URI depuis .env.local
+                   ex : https://fabiengathe.dev
+#}
+
+{% if seo is defined %}
+  {# ── Meta standards ─────────────────────────────────────────────────────────── #}
+  {% for tag in seo.meta %}
+    {% if tag.name == 'google-site-verification' and app.environment == 'prod' %}
+      <meta name="{{ tag.name }}" content="{{ GOOGLE_SITE_VERIFICATION }}">
+    {% else %}
+      <meta name="{{ tag.name }}" content="{{ tag.content }}">
+    {% endif %}
+  {% endfor %}
+
+  {# ── Open Graph ──────────────────────────────────────────────────────────────── #}
+  {% for tag in seo.og %}
+    {% if tag.is_url %}
+      {% if tag.url_type == 'current' %}
+        <meta property="{{ tag.property }}" content="{{ DEFAULT_URI ~ app.request.pathInfo }}">
+      {% elseif tag.url_type == 'asset' %}
+        <meta property="{{ tag.property }}" content="{{ DEFAULT_URI ~ asset(tag.content) }}">
+      {% endif %}
+    {% else %}
+      <meta property="{{ tag.property }}" content="{{ tag.content }}">
+    {% endif %}
+  {% endfor %}
+
+  {# ── Twitter Card ────────────────────────────────────────────────────────────── #}
+  {% for tag in seo.twitter %}
+    {% if tag.is_url %}
+      {% if tag.url_type == 'current' %}
+        <meta name="{{ tag.name }}" content="{{ DEFAULT_URI ~ app.request.pathInfo }}">
+      {% elseif tag.url_type == 'asset' %}
+        <meta name="{{ tag.name }}" content="{{ DEFAULT_URI ~ asset(tag.content) }}">
+      {% endif %}
+    {% else %}
+      <meta name="{{ tag.name }}" content="{{ tag.content }}">
+    {% endif %}
+  {% endfor %}
+
+  {# ── Links (canonical…) ──────────────────────────────────────────────────────── #}
+  {% for tag in seo.links %}
+    {% if tag.is_url %}
+      {% if tag.url_type == 'current' %}
+        <link rel="{{ tag.rel }}" href="{{ DEFAULT_URI ~ app.request.pathInfo }}">
+      {% elseif tag.url_type == 'asset' %}
+        <link rel="{{ tag.rel }}" href="{{ DEFAULT_URI ~ asset(tag.content) }}">
+      {% endif %}
+    {% else %}
+      <link rel="{{ tag.rel }}" href="{{ tag.content }}">
+    {% endif %}
+  {% endfor %}
+{% endif %}

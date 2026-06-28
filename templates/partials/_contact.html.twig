@@ -1,0 +1,226 @@
+{# --- Contact ------------------------------------------------------------------ #}
+
+<div class="contact">
+
+  <div class="contact__intro">
+    <p class="contact__text">
+      Une opportunité, un projet, ou simplement envie d'échanger ?
+      Envoyez-moi un message — je réponds rapidement.
+    </p>
+  </div>
+
+  <div class="contact__layout">
+
+    {# ── Formulaire ── #}
+    <form
+      id="contact-form"
+      class="contact__form"
+      novalidate
+      aria-label="Formulaire de contact"
+      data-action="{{ path('app_home_contact') }}"
+    >
+
+      {# ── Ligne nom + téléphone ── #}
+      <div class="contact__row">
+
+        {# fullName #}
+        <div class="contact__field mb-3">
+          <label for="contact-fullName" class="form-label">
+            Nom complet
+            <span class="contact__required" aria-hidden="true">*</span>
+          </label>
+          <input
+            type="text"
+            id="contact-fullName"
+            name="fullName"
+            class="form-control"
+            autocomplete="name"
+            required
+            aria-required="true"
+            aria-describedby="contact-fullName-error"
+          />
+          <small id="contact-fullName-error" class="invalid-feedback" role="alert" aria-live="polite"></small>
+        </div>
+
+        {# phone #}
+        <div class="contact__field mb-3">
+          <label for="contact-phone" class="form-label">
+            Téléphone
+            <span class="contact__optional">(optionnel)</span>
+          </label>
+          <input
+            type="tel"
+            id="contact-phone"
+            name="phone"
+            class="form-control"
+            autocomplete="tel"
+            aria-describedby="contact-phone-error contact-phone-hint"
+            placeholder="06 12 34 56 78"
+          />
+          <small id="contact-phone-hint" class="contact__hint">Format français — ex : 06 12 34 56 78</small>
+          <small id="contact-phone-error" class="invalid-feedback" role="alert" aria-live="polite"></small>
+        </div>
+
+      </div>
+
+      {# email #}
+      <div class="contact__field mb-3">
+        <label for="contact-email" class="form-label">
+          Adresse email
+          <span class="contact__required" aria-hidden="true">*</span>
+        </label>
+        <input
+          type="email"
+          id="contact-email"
+          name="email"
+          class="form-control"
+          autocomplete="email"
+          required
+          aria-required="true"
+          aria-describedby="contact-email-error"
+        />
+        <small id="contact-email-error" class="invalid-feedback" role="alert" aria-live="polite"></small>
+      </div>
+
+      {# subject #}
+      <div class="contact__field mb-3">
+        <label for="contact-subject" class="form-label">
+          Motif du contact
+          <span class="contact__required" aria-hidden="true">*</span>
+        </label>
+        <select
+          id="contact-subject"
+          name="subject"
+          class="form-select"
+          required
+          aria-required="true"
+          aria-describedby="contact-subject-error"
+        >
+          <option value="" disabled selected>Sélectionner un motif…</option>
+          <option value="job_offer">Offre d'emploi</option>
+          <option value="project_proposition">Proposition de projet</option>
+          <option value="networking">Networking / échange</option>
+          <option value="other_motive">Autre</option>
+        </select>
+        <small id="contact-subject-error" class="invalid-feedback" role="alert" aria-live="polite"></small>
+      </div>
+
+      {# link_proposition — conditionnel (job_offer | project_proposition) #}
+      <div
+        id="contact-link-wrapper"
+        class="contact__field contact__field--conditional mb-3"
+        aria-hidden="true"
+        hidden
+      >
+        <label for="contact-link" class="form-label">
+          Lien de l'offre / du projet
+          <span class="contact__required" aria-hidden="true">*</span>
+        </label>
+        <input
+          type="url"
+          id="contact-link"
+          name="link_proposition"
+          class="form-control"
+          aria-describedby="contact-link-error"
+          placeholder="https://…"
+        />
+        <small id="contact-link-error" class="invalid-feedback" role="alert" aria-live="polite"></small>
+      </div>
+
+      {# message #}
+      <div class="contact__field mb-3">
+        <label for="contact-message" class="form-label">
+          Message
+          <span class="contact__required" aria-hidden="true">*</span>
+        </label>
+        <textarea
+          id="contact-message"
+          name="message"
+          class="form-control"
+          rows="6"
+          required
+          aria-required="true"
+          aria-describedby="contact-message-error"
+          placeholder="Décrivez votre demande…"
+        ></textarea>
+        <small id="contact-message-error" class="invalid-feedback" role="alert" aria-live="polite"></small>
+      </div>
+
+      {# Consentement RGPD — checkbox obligatoire #}
+      <div class="contact__field contact__field--consent mb-3">
+        <div class="form-check">
+          <input
+            type="checkbox"
+            id="contact-consent"
+            name="consent_data_usage"
+            class="form-check-input"
+            required
+            aria-required="true"
+            aria-describedby="contact-consent-error"
+            value="1"
+          />
+          <label for="contact-consent" class="form-check-label contact__consent-label">
+            J'accepte que mes données soient utilisées dans le cadre d'une tentative
+            de contact et ne seront pas transmises à des tiers.
+            En savoir plus 
+            <a
+              href="{{ path('app_home_legal') }}#politique-de-donnees"
+              class="contact__consent-link"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="En savoir plus sur l'utilisation des données (ouvre un nouvel onglet)"
+            >sur mon utilisation des données.</a>
+          </label>
+        </div>
+        <small id="contact-consent-error" class="invalid-feedback" role="alert" aria-live="polite"></small>
+      </div>
+
+      {# Submit #}
+      <div class="contact__submit">
+        <button
+          type="submit"
+          id="contact-submit"
+          class="btn btn--primary"
+          aria-label="Envoyer le message de contact"
+        >
+          Envoyer le message
+        </button>
+      </div>
+
+      {# Feedback global #}
+      <div
+        id="contact-feedback"
+        class="contact__feedback"
+        role="status"
+        aria-live="polite"
+        aria-atomic="true"
+      ></div>
+
+    </form>
+
+    {# ── Informations de contact ── #}
+    <aside class="contact__info" aria-label="Informations de contact">
+      {% for social in profile.socials %}
+        <a
+          href="{{ social.link }}"
+          class="contact__social-link"
+          aria-label="{{ social.name }}"
+          {% if not (social.link starts with 'mailto') %}
+            target="_blank"
+            rel="noopener noreferrer"
+          {% endif %}
+        >
+          <i class="{{ social.icon }}" aria-hidden="true"></i>
+          <span>{{ social.name }}</span>
+        </a>
+      {% endfor %}
+
+      <p class="contact__location">
+        <i class="mdi mdi-map-marker" aria-hidden="true"></i>
+        {{ profile.location }}
+      </p>
+    </aside>
+
+  </div>
+
+</div>

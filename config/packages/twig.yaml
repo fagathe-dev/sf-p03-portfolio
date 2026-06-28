@@ -7,6 +7,9 @@ twig:
         APP_LOGO_PNG: '%env(LOGO_PNG_PATH)%'
         APP_FAVICON: '%env(FAVICON_PATH)%'
         APP_NAME: '%env(APP_NAME)%'
+        DEFAULT_URI: '%env(DEFAULT_URI)%'
+        GOOGLE_SITE_VERIFICATION: '%env(GOOGLE_SITE_VERIFICATION)%'
+
 when@test:
     twig:
         strict_variables: true

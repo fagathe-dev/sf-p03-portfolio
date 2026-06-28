@@ -1,0 +1,21 @@
+// =============================================================================
+// _image.scss
+// =============================================================================
+img {
+  max-width: 100%;
+  height: auto;
+}
+figure {
+  margin: 0 0 1rem;
+}
+.img-fluid {
+  max-width: 100%;
+  height: auto;
+}
+.img-thumbnail {
+  padding: 0.25rem;
+  background-color: var(--ds-surface-bg);
+  border: var(--ds-border-width) solid var(--ds-border-color);
+  max-width: 100%;
+  height: auto;
+}

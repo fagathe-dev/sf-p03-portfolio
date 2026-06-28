@@ -1,0 +1,100 @@
+// =============================================================================
+// _utilities.scss
+// =============================================================================
+@use '../core/variables' as vars;
+
+// Spacing (Margin & Padding)
+@each $name, $size in vars.$spacers {
+  .m-#{$name} {
+    margin: $size !important;
+  }
+  .mt-#{$name} {
+    margin-top: $size !important;
+  }
+  .mb-#{$name} {
+    margin-bottom: $size !important;
+  }
+  .my-#{$name} {
+    margin-top: $size !important;
+    margin-bottom: $size !important;
+  }
+  .mx-#{$name} {
+    margin-left: $size !important;
+    margin-right: $size !important;
+  }
+
+  .p-#{$name} {
+    padding: $size !important;
+  }
+  .pt-#{$name} {
+    padding-top: $size !important;
+  }
+  .pb-#{$name} {
+    padding-bottom: $size !important;
+  }
+  .py-#{$name} {
+    padding-top: $size !important;
+    padding-bottom: $size !important;
+  }
+  .px-#{$name} {
+    padding-left: $size !important;
+    padding-right: $size !important;
+  }
+}
+
+// Display
+$displays: none, block, inline-block, flex, inline-flex, grid;
+@each $d in $displays {
+  .d-#{$d} {
+    display: $d !important;
+  }
+}
+
+// Colors
+.text-primary {
+  color: var(--ds-primary) !important;
+}
+.text-secondary {
+  color: var(--ds-secondary) !important;
+}
+.text-success {
+  color: var(--ds-success) !important;
+}
+.text-danger {
+  color: var(--ds-danger) !important;
+}
+.text-warning {
+  color: var(--ds-warning) !important;
+}
+
+.bg-primary {
+  background-color: var(--ds-primary) !important;
+  color: #fff !important;
+}
+.bg-secondary {
+  background-color: var(--ds-secondary) !important;
+  color: #fff !important;
+}
+.bg-success {
+  background-color: var(--ds-success) !important;
+  color: #fff !important;
+}
+
+// Shadows
+.shadow-sm {
+  box-shadow: var(--ds-shadow-sm) !important;
+}
+.shadow {
+  box-shadow: var(--ds-shadow) !important;
+}
+.shadow-none {
+  box-shadow: none !important;
+}
+
+// Object Fit
+$fits: contain, cover, fill, none, scale-down;
+@each $fit in $fits {
+  .object-fit-#{$fit} {
+    object-fit: $fit !important;
+  }
+}

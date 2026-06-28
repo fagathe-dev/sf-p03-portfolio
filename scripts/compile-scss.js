@@ -7,9 +7,9 @@ const isBuild =
   args.includes('--mode') && args[args.indexOf('--mode') + 1] === 'build';
 const isWatch = args.includes('--watch'); // Détection du flag watch
 
-const entryPoint = 'assets/scss/custom.scss';
+const entryPoint = 'assets/scss/app.scss';
 const outdir = 'public/css';
-const outfile = 'custom.css';
+const outfile = 'app.css';
 
 if (!fs.existsSync(outdir)) fs.mkdirSync(outdir, { recursive: true });
 

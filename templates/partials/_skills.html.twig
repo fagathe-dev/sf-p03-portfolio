@@ -1,0 +1,73 @@
+{# --- Compétences ------------------------------------------------------------- #}
+
+{% set level_labels = {
+  'debutant': 'Débutant',
+  'intermediaire': 'Intermédiaire',
+  'confirme': 'Confirmé',
+  'senior': 'Senior',
+  'expert': 'Expert'
+} %}
+
+<div class="skills">
+
+  {# ── Back-end ── #}
+  {% set back_end = skills|filter(s => s.category == 'back_end') %}
+  {% if back_end|length > 0 %}
+    <div class="skills__group">
+      <h3 class="skills__group-title" id="skills-backend">Back-end</h3>
+      <ul class="skills__grid" aria-labelledby="skills-backend">
+        {% for skill in back_end %}
+          <li class="skill-card{% if skill.isHighlight %} skill-card--highlight{% endif %}">
+            <i class="{{ skill.icon }} skill-card__icon" aria-hidden="true"></i>
+            <span class="skill-card__label">{{ skill.label }}</span>
+            <span
+              class="skill-card__level skill-card__level--{{ skill.level }}"
+              aria-label="Niveau : {{ level_labels[skill.level] ?? skill.level }}"
+            >{{ level_labels[skill.level] ?? skill.level }}</span>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+
+  {# ── Front-end ── #}
+  {% set front_end = skills|filter(s => s.category == 'front_end') %}
+  {% if front_end|length > 0 %}
+    <div class="skills__group">
+      <h3 class="skills__group-title" id="skills-frontend">Front-end</h3>
+      <ul class="skills__grid" aria-labelledby="skills-frontend">
+        {% for skill in front_end %}
+          <li class="skill-card{% if skill.isHighlight %} skill-card--highlight{% endif %}">
+            <i class="{{ skill.icon }} skill-card__icon" aria-hidden="true"></i>
+            <span class="skill-card__label">{{ skill.label }}</span>
+            <span
+              class="skill-card__level skill-card__level--{{ skill.level }}"
+              aria-label="Niveau : {{ level_labels[skill.level] ?? skill.level }}"
+            >{{ level_labels[skill.level] ?? skill.level }}</span>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+
+  {# ── Outils & DevOps ── #}
+  {% set other = skills|filter(s => s.category == 'other') %}
+  {% if other|length > 0 %}
+    <div class="skills__group">
+      <h3 class="skills__group-title" id="skills-other">Outils &amp; DevOps</h3>
+      <ul class="skills__grid" aria-labelledby="skills-other">
+        {% for skill in other %}
+          <li class="skill-card{% if skill.isHighlight %} skill-card--highlight{% endif %}">
+            <i class="{{ skill.icon }} skill-card__icon" aria-hidden="true"></i>
+            <span class="skill-card__label">{{ skill.label }}</span>
+            <span
+              class="skill-card__level skill-card__level--{{ skill.level }}"
+              aria-label="Niveau : {{ level_labels[skill.level] ?? skill.level }}"
+            >{{ level_labels[skill.level] ?? skill.level }}</span>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+
+</div>

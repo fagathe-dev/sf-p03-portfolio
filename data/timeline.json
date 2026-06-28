@@ -1,0 +1,83 @@
+[
+  {
+    "id": "tml-1",
+    "type": "experience",
+    "title": "Développeur Web Full-Stack",
+    "organization": "Agence Digitale XYZ",
+    "location": "Paris, France",
+    "startDate": "2023-09",
+    "endDate": null,
+    "description": "Développement et maintenance d'applications web sur mesure pour des clients variés. Conception d'APIs REST avec Symfony et API Platform, intégration front-end TypeScript/SCSS, revues de code et accompagnement junior.",
+    "highlights": [
+      "Refonte complète d'un ERP client en Symfony 7 (gain de 40 % sur les temps de chargement)",
+      "Mise en place d'une CI/CD GitHub Actions avec tests PHPUnit et déploiement automatisé",
+      "Encadrement d'un développeur junior pendant 6 mois"
+    ],
+    "stack": [
+      "Symfony",
+      "API Platform",
+      "TypeScript",
+      "PostgreSQL",
+      "Docker",
+      "GitHub Actions"
+    ]
+  },
+  {
+    "id": "tml-2",
+    "type": "experience",
+    "title": "Développeur Web Back-End",
+    "organization": "Startup SaaS — MonProjet.io",
+    "location": "Lyon, France (télétravail)",
+    "startDate": "2022-01",
+    "endDate": "2023-08",
+    "description": "Développement des fonctionnalités back-end de la plateforme SaaS. Conception du modèle de données, développement des APIs consommées par l'application React, gestion des intégrations tierces (Stripe, SendGrid).",
+    "highlights": [
+      "Architecture microservices avec Symfony Messenger et RabbitMQ",
+      "Intégration du paiement récurrent Stripe (abonnements et facturation)",
+      "Réduction de 60 % du temps de réponse API via mise en cache Redis"
+    ],
+    "stack": ["Symfony", "MySQL", "Redis", "RabbitMQ", "Stripe", "SendGrid"]
+  },
+  {
+    "id": "tml-3",
+    "type": "experience",
+    "title": "Développeur Web (Alternance)",
+    "organization": "Cabinet de Conseil Numérique — NumeriCo",
+    "location": "Bordeaux, France",
+    "startDate": "2020-09",
+    "endDate": "2022-01",
+    "description": "Alternance de 16 mois au sein du pôle développement. Participation au développement de sites institutionnels et d'applications internes sous Symfony. Première exposition aux bonnes pratiques (tests unitaires, code review, SOLID).",
+    "highlights": [
+      "Développement d'un module de gestion documentaire pour un client grand compte",
+      "Rédaction de tests unitaires PHPUnit (couverture passée de 20 % à 75 %)"
+    ],
+    "stack": ["Symfony", "jQuery", "MySQL", "PHPUnit"]
+  },
+  {
+    "id": "tml-4",
+    "type": "education",
+    "title": "Bachelor Développeur Web & Mobile",
+    "organization": "YNOV Campus",
+    "location": "Bordeaux, France",
+    "startDate": "2020-09",
+    "endDate": "2022-06",
+    "description": "Formation en alternance axée sur le développement web moderne. Cours de PHP/Symfony, JavaScript, bases de données relationnelles, méthodes agiles et gestion de projet.",
+    "highlights": [
+      "Major de promotion — mention Très Bien",
+      "Projet de fin d'étude : plateforme de mise en relation freelances / entreprises"
+    ],
+    "stack": null
+  },
+  {
+    "id": "tml-5",
+    "type": "education",
+    "title": "BTS Services Informatiques aux Organisations (SIO) — option SLAM",
+    "organization": "Lycée Technique Les Chartrons",
+    "location": "Bordeaux, France",
+    "startDate": "2018-09",
+    "endDate": "2020-06",
+    "description": "Formation initiale en développement d'applications. Apprentissage des bases du développement web (HTML/CSS, PHP, SQL), algorithmique et réseaux.",
+    "highlights": null,
+    "stack": null
+  }
+]

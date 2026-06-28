@@ -1,0 +1,197 @@
+// =============================================================================
+// _modal.scss — Composant Modal / Dialog natif (<dialog>)
+// =============================================================================
+
+dialog {
+  border: none;
+  padding: 0;
+  background: transparent;
+  max-width: none;
+  max-height: none;
+
+  &:not([open]) {
+    display: none;
+  }
+
+  .dialog-container {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--ds-surface-bg);
+    border: var(--ds-border-width) solid var(--ds-border-color);
+    border-radius: var(--ds-radius-lg, 0.75rem);
+    box-shadow: var(--ds-shadow-lg);
+    max-height: 90vh;
+    overflow: hidden;
+  }
+
+  .dialog-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    border-bottom: var(--ds-border-width) solid var(--ds-border-color);
+    flex-shrink: 0;
+  }
+
+  .dialog-title {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    margin: 0;
+  }
+
+  .dialog-close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    background: transparent;
+    border: none;
+    border-radius: var(--ds-radius-sm);
+    cursor: pointer;
+    color: var(--ds-text-muted);
+    line-height: 1;
+
+    &:hover {
+      background-color: var(--ds-surface-hover);
+      color: var(--ds-text-primary);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--ds-color-primary);
+      outline-offset: 2px;
+    }
+  }
+
+  .dialog-body {
+    padding: 1.5rem;
+    overflow-y: auto;
+    flex: 1;
+  }
+
+  .dialog-footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    padding: 1rem 1.5rem;
+    border-top: var(--ds-border-width) solid var(--ds-border-color);
+    flex-shrink: 0;
+  }
+}
+
+// --- Variante modal (bloquante, centrée) ------------------------------------
+dialog.modal {
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  width: min(calc(100% - 2rem), 540px);
+
+  opacity: 0;
+  transform: translateY(-0.5rem) scale(0.98);
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease,
+    display 0.2s allow-discrete,
+    overlay 0.2s allow-discrete;
+
+  &[open] {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+
+    @starting-style {
+      opacity: 0;
+      transform: translateY(-0.5rem) scale(0.98);
+    }
+  }
+
+  &::backdrop {
+    background-color: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    opacity: 0;
+    transition:
+      opacity 0.2s ease,
+      display 0.2s allow-discrete,
+      overlay 0.2s allow-discrete;
+
+    @starting-style {
+      opacity: 0;
+    }
+  }
+
+  &[open]::backdrop {
+    opacity: 1;
+  }
+
+  // Modificateurs de taille
+  &.dialog--sm {
+    width: min(calc(100% - 2rem), 380px);
+  }
+  &.dialog--lg {
+    width: min(calc(100% - 2rem), 720px);
+  }
+  &.dialog--xl {
+    width: min(calc(100% - 2rem), 960px);
+  }
+  &.dialog--full {
+    width: calc(100% - 2rem);
+  }
+}
+
+// --- Variante dialog (non bloquante, haut-droite) ---------------------------
+dialog.dialog {
+  position: fixed;
+  top: 1.5rem;
+  right: 1.5rem;
+  width: min(calc(100% - 3rem), 420px);
+  z-index: var(--ds-z-modal, 1050);
+  filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.18));
+
+  opacity: 0;
+  transform: translateY(-0.75rem);
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease,
+    display 0.2s allow-discrete,
+    overlay 0.2s allow-discrete;
+
+  &[open] {
+    opacity: 1;
+    transform: translateY(0);
+
+    @starting-style {
+      opacity: 0;
+      transform: translateY(-0.75rem);
+    }
+  }
+
+  .dialog-container {
+    border-left: 3px solid var(--ds-color-primary);
+  }
+}
+
+// --- Responsive -------------------------------------------------------------
+@media (max-width: 576px) {
+  dialog.modal {
+    margin: auto 0 0;
+
+    .dialog-container {
+      border-radius: var(--ds-radius-lg, 0.75rem) var(--ds-radius-lg, 0.75rem) 0
+        0;
+      max-height: 92svh;
+    }
+  }
+
+  dialog.dialog {
+    top: auto;
+    bottom: 1rem;
+    right: 0.75rem;
+    left: 0.75rem;
+    width: auto;
+  }
+}
