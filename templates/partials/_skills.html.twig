@@ -18,7 +18,7 @@
       <ul class="skills__grid" aria-labelledby="skills-backend">
         {% for skill in back_end %}
           <li class="skill-card{% if skill.isHighlight %} skill-card--highlight{% endif %}">
-            <i class="{{ skill.icon }} skill-card__icon" aria-hidden="true"></i>
+            <i class="mdi {{ skill.icon }} skill-card__icon" aria-hidden="true"></i>
             <span class="skill-card__label">{{ skill.label }}</span>
             <span
               class="skill-card__level skill-card__level--{{ skill.level }}"
@@ -38,7 +38,7 @@
       <ul class="skills__grid" aria-labelledby="skills-frontend">
         {% for skill in front_end %}
           <li class="skill-card{% if skill.isHighlight %} skill-card--highlight{% endif %}">
-            <i class="{{ skill.icon }} skill-card__icon" aria-hidden="true"></i>
+            <i class="mdi {{ skill.icon }} skill-card__icon" aria-hidden="true"></i>
             <span class="skill-card__label">{{ skill.label }}</span>
             <span
               class="skill-card__level skill-card__level--{{ skill.level }}"
@@ -58,7 +58,7 @@
       <ul class="skills__grid" aria-labelledby="skills-other">
         {% for skill in other %}
           <li class="skill-card{% if skill.isHighlight %} skill-card--highlight{% endif %}">
-            <i class="{{ skill.icon }} skill-card__icon" aria-hidden="true"></i>
+            <i class="mdi {{ skill.icon }} skill-card__icon" aria-hidden="true"></i>
             <span class="skill-card__label">{{ skill.label }}</span>
             <span
               class="skill-card__level skill-card__level--{{ skill.level }}"

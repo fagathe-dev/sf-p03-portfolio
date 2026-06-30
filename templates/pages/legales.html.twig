@@ -1,0 +1,75 @@
+{# templates/legales.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Mentions Légales — Jimmy{% endblock %}
+
+{% block body %}
+  <section class="section">
+    {# Limitation de la largeur pour un meilleur confort de lecture des textes de loi #}
+    <div class="section__inner" style="max-width: 800px; margin: 0 auto;">
+      
+      <div class="mb-12">
+        <h1 class="display-2 mb-2">Mentions Légales</h1>
+        <p style="font-family: var(--font-mono); color: var(--ds-neutral-500); font-size: var(--font-size-sm);">
+          Dernière mise à jour : {{ "now"|date("d/m/Y") }}
+        </p>
+      </div>
+
+      {# Éditeur du site #}
+      <div class="card mb-8">
+        <div class="card-body">
+          <h2 class="h4 mb-4 text-primary">// Éditeur du site</h2>
+          <p class="mb-1"><strong>Nom :</strong> Frédérick AGATHE</p>
+          <p class="mb-1"><strong>Statut :</strong> Particulier</p>
+          <p class="mb-1"><strong>Localisation :</strong> Île-de-France, France</p>
+          <p class="mb-0"><strong>Contact :</strong> <em>fagathe77@gmail.com</em></p>
+        </div>
+      </div>
+
+      {# Hébergement #}
+      <div class="card mb-8">
+        <div class="card-body">
+          <h2 class="h4 mb-4 text-primary">// Hébergement</h2>
+          <p class="mb-2">Ce site est hébergé par :</p>
+          <p class="mb-1"><strong><a href="https://www.o2switch.fr/" target="_blank" rel="noopener noreferrer">o2switch</a></strong></p>
+          <p class="mb-1" style="color: var(--color-ink-muted);">
+            Chemin des Pardiaux,
+            63000 Clermont-Ferrand
+          </p>
+          <p class="mb-0" style="color: var(--color-ink-muted);">04 44 44 60 40 / support@o2switch.fr</p>
+        </div>
+      </div>
+
+      {# Politique de confidentialité avec l'ancre ciblée par le formulaire #}
+      <div class="card mb-8" id="politique-de-donnees">
+        <div class="card-body">
+          <h2 class="h4 mb-4 text-primary">// Politique de confidentialité</h2>
+          
+          <p class="mb-4">
+            Dans le cadre de l'utilisation du formulaire de contact présent sur ce portfolio, les données personnelles suivantes sont susceptibles d'être collectées : <strong>nom, adresse e-mail et contenu du message</strong>.
+          </p>
+          
+          <p class="mb-4">
+            Ces informations sont strictement utilisées dans le seul but de pouvoir répondre à votre prise de contact ou à vos propositions professionnelles (exécution de mesures précontractuelles ou intérêt légitime).
+          </p>
+          
+          <p class="mb-4">
+            <strong>Aucune donnée n'est stockée dans une base de données.</strong> Les informations transmises via le formulaire génèrent un e-mail envoyé directement sur la boîte de réception de l'éditeur. Vos données ne seront jamais cédées, vendues ou louées à des tiers.
+          </p>
+          
+          <p class="mb-0">
+            Conformément à la réglementation applicable (RGPD), vous disposez d'un droit d'accès, de rectification et de suppression de vos données personnelles. Pour l'exercer, il vous suffit d'en faire la demande en répondant aux e-mails échangés ou via le formulaire de contact du site.
+          </p>
+        </div>
+      </div>
+
+      {# Bouton de retour #}
+      <div class="mt-12">
+        <a href="{{ path('app_home_index')|default('/') }}" class="btn btn--outline">
+          ← Retour au portfolio
+        </a>
+      </div>
+
+    </div>
+  </section>
+{% endblock %}

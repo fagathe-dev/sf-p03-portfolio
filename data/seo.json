@@ -3,15 +3,15 @@
     "meta": [
       {
         "name": "description",
-        "content": "Fabien Gathe — Développeur Web Full-Stack spécialisé Symfony & TypeScript. Découvrez mon portfolio, mes projets et mes compétences."
+        "content": "Frédérick AGATHE — Développeur Web Full-Stack spécialisé Symfony & TypeScript. Découvrez mon portfolio, mes projets et mes compétences."
       },
       {
         "name": "author",
-        "content": "Fabien Gathe"
+        "content": "Frédérick AGATHE"
       },
       {
         "name": "keywords",
-        "content": "Fabien Gathe, développeur web, portfolio, Symfony, TypeScript, PHP, full-stack, développeur web France"
+        "content": "Frédérick AGATHE, développeur web, portfolio, Symfony, TypeScript, PHP, full-stack, développeur web France"
       },
       {
         "name": "google-site-verification",
@@ -34,7 +34,7 @@
       },
       {
         "property": "og:title",
-        "content": "Fabien Gathe — Développeur Web Full-Stack",
+        "content": "Frédérick AGATHE — Développeur Web Full-Stack",
         "is_url": false
       },
       {
@@ -55,7 +55,7 @@
       },
       {
         "property": "og:image",
-        "content": "/assets/images/avatar.webp",
+        "content": "/images/photo-hero.jpg",
         "is_url": true,
         "url_type": "asset"
       }
@@ -68,7 +68,7 @@
       },
       {
         "name": "twitter:title",
-        "content": "Fabien Gathe — Développeur Web Full-Stack",
+        "content": "Frédérick AGATHE — Développeur Web Full-Stack",
         "is_url": false
       },
       {
@@ -78,7 +78,7 @@
       },
       {
         "name": "twitter:image",
-        "content": "/assets/images/avatar.webp",
+        "content": "/images/photo-hero.jpg",
         "is_url": true,
         "url_type": "asset"
       }

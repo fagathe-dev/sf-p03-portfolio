@@ -14,7 +14,7 @@ use Symfony\Component\Mime\Address;
  * Envoie les deux emails déclenchés à la soumission du formulaire de contact :
  *
  *   1. Récapitulatif à l'utilisateur (confirmation de réception)
- *   2. Notification à Fabien Gathe (contenu complet du message)
+ *   2. Notification à Frédérick AGATHE (contenu complet du message)
  *
  * Les templates Twig sont dans templates/emails/.
  * Les adresses et le nom d'expéditeur sont injectés depuis les paramètres Symfony

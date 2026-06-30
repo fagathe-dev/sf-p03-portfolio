@@ -1,11 +1,11 @@
 {
-  "fullName": "Fabien Gathe",
+  "fullName": "Frédérick AGATHE",
   "title": "Développeur Web Full-Stack",
   "tagline": "Je conçois des applications web <strong>robustes et élégantes</strong>, de la base de données à l'interface utilisateur.",
   "bio": "Passionné par le développement web depuis plusieurs années, je me spécialise dans l'écosystème <strong>Symfony</strong> côté serveur et <strong>TypeScript</strong> côté client. J'accorde une attention particulière à la <em>qualité du code</em>, aux bonnes pratiques et à l'expérience utilisateur. Toujours curieux, j'aime explorer de nouvelles technologies et relever des défis techniques ambitieux.",
-  "avatar": "/images/auth-cover.png",
-  "cv": "/assets/files/cv-fabien-gathe.pdf",
-  "location": "France",
+  "avatar": "/images/photo-hero.jpg",
+  "cv": "/assets/files/cv_agathe_frederick.pdf",
+  "location": "Région parisienne, France",
   "socials": [
     {
       "name": "GitHub",
@@ -15,12 +15,19 @@
     {
       "name": "LinkedIn",
       "icon": "mdi mdi-linkedin",
-      "link": "https://linkedin.com/in/fabien-gathe"
+      "link": "https://www.linkedin.com/in/fr%C3%A9d%C3%A9rick-agathe-027553128/"
     },
     {
       "name": "Email",
       "icon": "mdi mdi-email",
-      "link": "mailto:contact@fabiengathe.dev"
+      "link": "mailto:fagathe77@gmail.com",
+      "presetMessage": "Bonjour Frédérick,\n\nSuite à la visite de votre portfolio, je vous contacte afin d'échanger sur une opportunité de collaboration.\n\nDans l'attente de votre retour, je vous souhaite une excellente journée."
+    },
+    {
+      "name": "WhatsApp",
+      "icon": "mdi mdi-whatsapp",
+      "link": "https://wa.me/33649640119",
+      "presetMessage": "Bonjour Frédérick, j'ai découvert votre portfolio et votre profil a retenu mon attention. Seriez-vous disponible pour échanger prochainement ?"
     }
   ]
 }

@@ -2,82 +2,113 @@
   {
     "id": "tml-1",
     "type": "experience",
-    "title": "Développeur Web Full-Stack",
-    "organization": "Agence Digitale XYZ",
-    "location": "Paris, France",
-    "startDate": "2023-09",
+    "title": "Développeur d'application PHP",
+    "organization": "Meilleurtaux",
+    "location": "Paris 8",
+    "startDate": "2022-12",
     "endDate": null,
-    "description": "Développement et maintenance d'applications web sur mesure pour des clients variés. Conception d'APIs REST avec Symfony et API Platform, intégration front-end TypeScript/SCSS, revues de code et accompagnement junior.",
+    "description": "Maintien en condition opérationnelle d'applications ReactJS et PHP au sein des équipes de Meilleurtaux.",
     "highlights": [
-      "Refonte complète d'un ERP client en Symfony 7 (gain de 40 % sur les temps de chargement)",
-      "Mise en place d'une CI/CD GitHub Actions avec tests PHPUnit et déploiement automatisé",
-      "Encadrement d'un développeur junior pendant 6 mois"
+      "Migration d'applications de PHP 7 vers 8.3 avec refactoring progressif du code legacy",
+      "Maintenance et évolution d'une application ReactJS complexe avec intégration de nouvelles fonctionnalités et correction de bugs critiques",
+      "Création de scripts NodeJS (CLI) et conteneurisation via Docker pour fluidifier l'environnement de développement local",
+      "Optimisation de requêtes SQL et réduction des temps de chargement sur les interfaces critiques",
+      "Rédaction de documentation technique, code review et accompagnement technique de l'équipe"
     ],
-    "stack": [
-      "Symfony",
-      "API Platform",
-      "TypeScript",
-      "PostgreSQL",
-      "Docker",
-      "GitHub Actions"
-    ]
+    "stack": ["PHP 8.3", "Symfony", "ReactJS", "NodeJS", "Docker", "SQL"]
   },
   {
     "id": "tml-2",
     "type": "experience",
-    "title": "Développeur Web Back-End",
-    "organization": "Startup SaaS — MonProjet.io",
-    "location": "Lyon, France (télétravail)",
-    "startDate": "2022-01",
-    "endDate": "2023-08",
-    "description": "Développement des fonctionnalités back-end de la plateforme SaaS. Conception du modèle de données, développement des APIs consommées par l'application React, gestion des intégrations tierces (Stripe, SendGrid).",
+    "title": "Développeur FullStack PHP Symfony",
+    "organization": "Softia Ingénierie",
+    "location": "Le Kremlin-Bicêtre",
+    "startDate": "2021-07",
+    "endDate": "2022-11",
+    "description": "Maintien et évolution d'applications métiers PHP complexes (Zend Framework, Symfony, Laravel).",
     "highlights": [
-      "Architecture microservices avec Symfony Messenger et RabbitMQ",
-      "Intégration du paiement récurrent Stripe (abonnements et facturation)",
-      "Réduction de 60 % du temps de réponse API via mise en cache Redis"
+      "Migration complexe d'une application monolithique Zend Framework 2.4 vers une structure Symfony 6 robuste",
+      "Maintenance et évolution d'une application Laravel 8 avec intégration de nouvelles fonctionnalités et correction de bugs critiques",
+      "Rédaction de tests automatisés (codeceptJS) pour sécuriser les régressions métier et garantir la stabilité des livraisons",
+      "Réalisation d'audits techniques complets pour identifier les goulots d'étranglement et les failles de sécurité",
+      "Mise à jour de référentiels applicatifs via des scripts Python",
+      "Implémentation des principes SOLID sur le backend"
     ],
-    "stack": ["Symfony", "MySQL", "Redis", "RabbitMQ", "Stripe", "SendGrid"]
+    "stack": [
+      "PHP",
+      "Symfony 6",
+      "Zend Framework",
+      "Laravel",
+      "Python",
+      "Linux",
+      "CodeceptJS"
+    ]
   },
   {
     "id": "tml-3",
     "type": "experience",
-    "title": "Développeur Web (Alternance)",
-    "organization": "Cabinet de Conseil Numérique — NumeriCo",
-    "location": "Bordeaux, France",
-    "startDate": "2020-09",
-    "endDate": "2022-01",
-    "description": "Alternance de 16 mois au sein du pôle développement. Participation au développement de sites institutionnels et d'applications internes sous Symfony. Première exposition aux bonnes pratiques (tests unitaires, code review, SOLID).",
+    "title": "Développeur Fullstack Python/VueJS (Stage)",
+    "organization": "GeretonID",
+    "location": "à distance",
+    "startDate": "2021-01",
+    "endDate": "2021-03",
+    "description": "Refonte d'interfaces et développement d'APIs au sein d'une stack Python/JS.",
     "highlights": [
-      "Développement d'un module de gestion documentaire pour un client grand compte",
-      "Rédaction de tests unitaires PHPUnit (couverture passée de 20 % à 75 %)"
+      "Refonte complète de l'interface utilisateur (HTML, CSS, Bootstrap) avec un focus sur l'ergonomie et l'UX",
+      "Refactorisation du code VueJS existant pour améliorer la maintenabilité et la séparation des responsabilités (SOC)",
+      "Développement from scratch d'une API REST en Python (Flask) pour alimenter le nouveau moteur de blog",
+      "Implémentation d'un module Javascript avancé permettant l'affichage dynamique et la génération de PDF en temps réel"
     ],
-    "stack": ["Symfony", "jQuery", "MySQL", "PHPUnit"]
+    "stack": ["Python", "Flask", "VueJS", "JavaScript", "Bootstrap"]
   },
   {
     "id": "tml-4",
-    "type": "education",
-    "title": "Bachelor Développeur Web & Mobile",
-    "organization": "YNOV Campus",
-    "location": "Bordeaux, France",
-    "startDate": "2020-09",
-    "endDate": "2022-06",
-    "description": "Formation en alternance axée sur le développement web moderne. Cours de PHP/Symfony, JavaScript, bases de données relationnelles, méthodes agiles et gestion de projet.",
+    "type": "experience",
+    "title": "Développeur PHP Symfony/Laravel (Alternance)",
+    "organization": "CGI",
+    "location": "Paris",
+    "startDate": "2017-12",
+    "endDate": "2019-11",
+    "description": "Alternance axée sur la Tierce Maintenance Applicative (TMA) et l'intégration web.",
     "highlights": [
-      "Major de promotion — mention Très Bien",
-      "Projet de fin d'étude : plateforme de mise en relation freelances / entreprises"
+      "Prise en charge de la TMA sur un parc d'applications web critiques en PHP et Laravel",
+      "Intégration d'évolutions front-end et refonte graphique de thèmes WordPress",
+      "Participation au cycle de vie complet du développement, incluant le chiffrage et la qualification des anomalies",
+      "Rédaction de documentations fonctionnelles et modes d'emploi vulgarisés pour faciliter l'onboarding des utilisateurs finaux"
     ],
-    "stack": null
+    "stack": ["PHP", "Symfony", "Laravel", "WordPress"]
   },
   {
     "id": "tml-5",
     "type": "education",
-    "title": "BTS Services Informatiques aux Organisations (SIO) — option SLAM",
-    "organization": "Lycée Technique Les Chartrons",
-    "location": "Bordeaux, France",
-    "startDate": "2018-09",
-    "endDate": "2020-06",
-    "description": "Formation initiale en développement d'applications. Apprentissage des bases du développement web (HTML/CSS, PHP, SQL), algorithmique et réseaux.",
-    "highlights": null,
+    "title": "Développeur d'application PHP/Symfony (Bac +3/4)",
+    "organization": "Openclassrooms",
+    "location": "En ligne",
+    "startDate": "2021-01",
+    "endDate": "2021-12",
+    "description": "Formation diplômante orientée conception et développement web avancé.",
+    "highlights": [
+      "Conception d'applications Web et d'API REST PHP",
+      "Bases approfondies de PHP, HTML, WordPress et Symfony",
+      "Gestion de bases de données relationnelles (MySQL) et rédaction de tests unitaires",
+      "Mise en place de bonnes pratiques de développement et d'architecture logicielle",
+      "Conception d'un projet complet de A à Z, incluant la gestion de projet, le développement et le déploiement"
+    ],
+    "stack": ["PHP", "Symfony", "MySQL"]
+  },
+  {
+    "id": "tml-6",
+    "type": "education",
+    "title": "BTS Technicien Système, Réseaux et Sécurité (Bac +2)",
+    "organization": "IPI (Institut PolyInformatique)",
+    "location": "Paris",
+    "startDate": "2017-09",
+    "endDate": "2019-07",
+    "description": "Formation technique fondamentale sur l'administration système, les réseaux et la programmation.",
+    "highlights": [
+      "Acquisition des bases en administration de réseaux",
+      "Fondamentaux de la programmation et algorithmique"
+    ],
     "stack": null
   }
 ]

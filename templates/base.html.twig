@@ -40,9 +40,7 @@
     {% block body %}{% endblock %}
   </main>
 
-  {% block footer %}
-    {% include 'partials/_footer.html.twig' ignore missing %}
-  {% endblock %}
+  {% include 'partials/_footer.html.twig' ignore missing %}
 
   {# JS global #}
   <script src="{{ asset('js/main.js') }}" defer></script>

@@ -98,9 +98,18 @@
 
         <ul class="hero__socials" aria-label="Réseaux sociaux">
           {% for social in profile.socials %}
+            {% set finalLink = social.link %}
+            {% if social.presetMessage is defined %}
+              {% if social.name == 'Email' %}
+                {% set finalLink = finalLink ~ '?subject=Contact via Portfolio&body=' ~ social.presetMessage|url_encode %}
+              {% elseif social.name == 'WhatsApp' %}
+                {% set finalLink = finalLink ~ '?text=' ~ social.presetMessage|url_encode %}
+              {% endif %}
+            {% endif %}
+
             <li>
               <a
-                href="{{ social.link }}"
+                href="{{ finalLink }}"
                 class="hero__social-link"
                 aria-label="{{ social.name }}"
                 {% if not (social.link starts with 'mailto') %}
@@ -185,15 +194,24 @@
       <p class="footer__copy">&copy; {{ "now"|date("Y") }} {{ profile.fullName }}</p>
       <ul class="footer__socials" aria-label="Réseaux sociaux">
         {% for social in profile.socials %}
+          {% set finalLink = social.link %}
+          {% if social.presetMessage is defined %}
+            {% if social.name == 'Email' %}
+              {% set finalLink = finalLink ~ '?subject=Contact via Portfolio&body=' ~ social.presetMessage|url_encode %}
+            {% elseif social.name == 'WhatsApp' %}
+              {% set finalLink = finalLink ~ '?text=' ~ social.presetMessage|url_encode %}
+            {% endif %}
+          {% endif %}
+
           <li>
             <a
-              href="{{ social.link }}"
+              href="{{ finalLink }}"
               class="hero__social-link"
               aria-label="{{ social.name }}"
-            {% if not (social.link starts with 'mailto') %}
-              target="_blank"
-              rel="noopener noreferrer"
-            {% endif %}
+              {% if not (social.link starts with 'mailto') %}
+                target="_blank"
+                rel="noopener noreferrer"
+              {% endif %}
             ><i class="{{ social.icon }}" aria-hidden="true"></i></a>
           </li>
         {% endfor %}

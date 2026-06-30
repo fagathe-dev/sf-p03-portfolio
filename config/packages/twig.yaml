@@ -9,6 +9,7 @@ twig:
         APP_NAME: '%env(APP_NAME)%'
         DEFAULT_URI: '%env(DEFAULT_URI)%'
         GOOGLE_SITE_VERIFICATION: '%env(GOOGLE_SITE_VERIFICATION)%'
+        BING_SITE_VERIFICATION: '%env(BING_SITE_VERIFICATION)%'
 
 when@test:
     twig:

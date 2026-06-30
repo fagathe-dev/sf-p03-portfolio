@@ -201,8 +201,17 @@
     {# ── Informations de contact ── #}
     <aside class="contact__info" aria-label="Informations de contact">
       {% for social in profile.socials %}
+        {% set finalLink = social.link %}
+        {% if social.presetMessage is defined %}
+          {% if social.name == 'Email' %}
+            {% set finalLink = finalLink ~ '?subject=Contact via Portfolio&body=' ~ social.presetMessage|url_encode %}
+          {% elseif social.name == 'WhatsApp' %}
+            {% set finalLink = finalLink ~ '?text=' ~ social.presetMessage|url_encode %}
+          {% endif %}
+        {% endif %}
+
         <a
-          href="{{ social.link }}"
+          href="{{ finalLink }}"
           class="contact__social-link"
           aria-label="{{ social.name }}"
           {% if not (social.link starts with 'mailto') %}

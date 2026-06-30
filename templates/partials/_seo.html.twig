@@ -9,8 +9,8 @@
 {% if seo is defined %}
   {# ── Meta standards ─────────────────────────────────────────────────────────── #}
   {% for tag in seo.meta %}
-    {% if tag.name == 'google-site-verification' and app.environment == 'prod' %}
-      <meta name="{{ tag.name }}" content="{{ GOOGLE_SITE_VERIFICATION }}">
+    {% if (tag.name == 'google-site-verification' or tag.name == 'msvalidate.01') and app.environment == 'prod' %}
+      <meta name="{{ tag.name }}" content="{{ tag.name == 'google-site-verification' ? GOOGLE_SITE_VERIFICATION : BING_SITE_VERIFICATION }}">
     {% else %}
       <meta name="{{ tag.name }}" content="{{ tag.content }}">
     {% endif %}
