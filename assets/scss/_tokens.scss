@@ -1,0 +1,151 @@
+// ==========================================================================
+// Surcharge des System Tokens — niveau 2 (_tokens.scss)
+// --------------------------------------------------------------------------
+// 1. Les couleurs (rôles, surfaces, contours) sont celles du Design System
+//    (chargé via CDN) : primary = indigo, secondary = neutral, surfaces = slate.
+//    Elles ne sont volontairement PAS redéfinies ici.
+// 2. Surcharge la typographie et les rayons (aspect brut / industriel) et crée
+//    les nouveaux tokens propres au portfolio (--ds-brutal-*, --ds-glass-*).
+// 3. Applique la surcouche Glassmorphism (Frosted Tonal Elevation) décrite
+//    dans migration.prompt.md via :root[data-ui-surface="glass"].
+// ==========================================================================
+
+@use 'sass:map';
+@use 'sass:meta';
+@use 'abstracts' as *;
+
+// ==========================================================================
+// 1. IDENTITÉ PORTFOLIO (Aspect Brut / Industriel) — CLAIR
+// ==========================================================================
+:root {
+  // --- Typographie : DM Mono pour les métadonnées, badges et repères techniques
+  @each $name, $value in $font-families-portfolio {
+    --ds-font-#{$name}: #{meta.inspect($value)};
+  }
+
+  // --- Rayons réduits (caractère brut / industriel)
+  @each $name, $value in $radii-industrial {
+    --ds-radius-#{$name}: #{$value};
+  }
+
+  // --- Nouveaux tokens propres au Portfolio (accent brut & grille industrielle)
+  --ds-brutal-offset: 3px;
+  --ds-shadow-brutal: var(--ds-brutal-offset) var(--ds-brutal-offset) 0
+    color-mix(in srgb, var(--ds-color-on-surface) 85%, transparent);
+  --ds-shadow-brutal-primary: var(--ds-brutal-offset) var(--ds-brutal-offset) 0
+    var(--ds-color-primary);
+  --ds-grid-line-color: color-mix(in srgb, var(--ds-color-on-surface) 5%, transparent);
+  --ds-grid-size: 2.5rem;
+}
+
+// ==========================================================================
+// 2. IDENTITÉ PORTFOLIO — SOMBRE
+// ==========================================================================
+[data-ui-theme='dark'] {
+  --ds-shadow-brutal: var(--ds-brutal-offset) var(--ds-brutal-offset) 0
+    color-mix(in srgb, var(--ds-color-primary) 65%, transparent);
+  --ds-shadow-brutal-primary: var(--ds-brutal-offset) var(--ds-brutal-offset) 0
+    var(--ds-color-primary);
+  --ds-grid-line-color: color-mix(in srgb, var(--ds-color-on-surface) 6%, transparent);
+}
+
+// ==========================================================================
+// 3. SURCOUCHE GLASSMORPHISM (Frosted Tonal Elevation — migration.prompt.md)
+// ==========================================================================
+:root[data-ui-surface='glass'] {
+  // 1. Nouvelles primitives de réfraction et spécularité
+  @each $name, $value in $glass-blurs {
+    --ds-glass-blur-#{$name}: #{$value};
+  }
+
+  --ds-glass-saturate: #{$glass-saturate};
+
+  // Opacités graduées pour conserver la hiérarchie tonale M3 Expressive
+  @each $name, $value in map.get($glass-opacities, 'light') {
+    --ds-glass-opacity-#{$name}: #{$value};
+  }
+
+  // Bordures spéculaires et reflets internes (Light mode)
+  --ds-glass-border: color-mix(
+    in srgb,
+    var(--ds-color-on-surface) 12%,
+    color-mix(in srgb, var(--ds-color-white) 55%, transparent)
+  );
+  --ds-glass-border-hover: color-mix(
+    in srgb,
+    var(--ds-color-primary) 42%,
+    color-mix(in srgb, var(--ds-color-white) 75%, transparent)
+  );
+  --ds-glass-highlight: inset 0 1px 0 0
+    color-mix(in srgb, var(--ds-color-white) 65%, transparent);
+  --ds-glass-shadow: 0 12px 32px -8px
+    color-mix(in srgb, var(--ds-color-on-surface) 8%, transparent);
+
+  // 2. Surcharge des System Tokens de surface existants
+  --ds-surface-container-low: color-mix(
+    in srgb,
+    var(--ds-surface) var(--ds-glass-opacity-low),
+    transparent
+  );
+  --ds-surface-container: color-mix(
+    in srgb,
+    var(--ds-surface) var(--ds-glass-opacity-md),
+    transparent
+  );
+  --ds-surface-container-high: color-mix(
+    in srgb,
+    var(--ds-surface) var(--ds-glass-opacity-high),
+    transparent
+  );
+  --ds-surface-container-highest: color-mix(
+    in srgb,
+    var(--ds-surface) var(--ds-glass-opacity-highest),
+    transparent
+  );
+  --ds-color-outline-variant: var(--ds-glass-border);
+}
+
+// Calibration spécifique pour le Dark Mode
+:root[data-ui-theme='dark'][data-ui-surface='glass'],
+[data-ui-surface='glass'] [data-ui-theme='dark'] {
+  @each $name, $value in map.get($glass-opacities, 'dark') {
+    --ds-glass-opacity-#{$name}: #{$value};
+  }
+
+  --ds-glass-border: color-mix(
+    in srgb,
+    var(--ds-color-on-surface) 14%,
+    color-mix(in srgb, var(--ds-color-white) 8%, transparent)
+  );
+  --ds-glass-border-hover: color-mix(
+    in srgb,
+    var(--ds-color-primary) 50%,
+    color-mix(in srgb, var(--ds-color-white) 22%, transparent)
+  );
+  --ds-glass-highlight: inset 0 1px 0 0
+    color-mix(in srgb, var(--ds-color-white) 14%, transparent);
+  --ds-glass-shadow: 0 16px 40px -8px
+    color-mix(in srgb, var(--ds-color-black) 48%, transparent);
+
+  --ds-surface-container-low: color-mix(
+    in srgb,
+    var(--ds-surface) var(--ds-glass-opacity-low),
+    transparent
+  );
+  --ds-surface-container: color-mix(
+    in srgb,
+    var(--ds-surface) var(--ds-glass-opacity-md),
+    transparent
+  );
+  --ds-surface-container-high: color-mix(
+    in srgb,
+    var(--ds-surface) var(--ds-glass-opacity-high),
+    transparent
+  );
+  --ds-surface-container-highest: color-mix(
+    in srgb,
+    var(--ds-surface) var(--ds-glass-opacity-highest),
+    transparent
+  );
+  --ds-color-outline-variant: var(--ds-glass-border);
+}

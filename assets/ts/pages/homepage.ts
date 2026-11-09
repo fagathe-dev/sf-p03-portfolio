@@ -1,122 +1,104 @@
 // =============================================================================
-// homepage.ts — Interactions de la page d'accueil
+// homepage.ts — Interactions de la page d'accueil (Design System Zéro BEM)
 // =============================================================================
-import { $, FormManager, fetchAPI, ApiError } from 'core-ts';
- 
+import { $, ApiError, FormManager, fetchAPI } from 'core-ts';
+
 // ── initNavbarScroll ──────────────────────────────────────────────────────────
-// IntersectionObserver sur #hero — bascule .navbar--scrolled dès que le hero
-// sort du viewport. Le CSS gère la transition visuelle.
+// IntersectionObserver sur #hero — bascule .is-scrolled sur #navbar dès que le
+// hero sort du viewport. Le CSS gère la transition visuelle.
 const initNavbarScroll = (): void => {
-  const navbar = $('#navbar') as HTMLElement;
-  const hero = $('#hero') as HTMLElement;
- 
+  const navbar = $('#navbar') as HTMLElement | null;
+  const hero = $('#hero') as HTMLElement | null;
+
   if (!navbar || !hero) return;
- 
+
   const observer = new IntersectionObserver(
     ([entry]) => {
-      navbar.classList.toggle('navbar--scrolled', !entry.isIntersecting);
+      navbar.classList.toggle('is-scrolled', !entry.isIntersecting);
     },
     { threshold: 0 },
   );
- 
+
   observer.observe(hero);
 };
- 
-// ── initBurger ────────────────────────────────────────────────────────────────
-// Toggle .is-open sur #navbar-menu-mobile, sync aria-expanded / aria-hidden.
-// Fermeture : clic sur lien mobile, clic en dehors du #navbar.
-const initBurger = (): void => {
-  const burger = $('#navbar-burger') as HTMLButtonElement;
-  const menu = $('#navbar-menu-mobile') as HTMLElement;
-  const navbar = $('#navbar') as HTMLElement;
- 
-  if (!burger || !menu) return;
- 
-  const closeMenu = (): void => {
-    menu.classList.remove('is-open');
-    menu.setAttribute('aria-hidden', 'true');
-    burger.setAttribute('aria-expanded', 'false');
-  };
- 
-  const openMenu = (): void => {
-    menu.classList.add('is-open');
-    menu.setAttribute('aria-hidden', 'false');
-    burger.setAttribute('aria-expanded', 'true');
-  };
- 
-  burger.addEventListener('click', () => {
-    menu.classList.contains('is-open') ? closeMenu() : openMenu();
-  });
- 
-  const mobileLinks = $<HTMLAnchorElement>(
-    '.navbar__mobile-link',
-    true,
-  ) as NodeListOf<HTMLAnchorElement> | null;
- 
-  mobileLinks?.forEach((link) => link.addEventListener('click', closeMenu));
- 
-  document.addEventListener('click', (event: MouseEvent) => {
-    if (navbar && !navbar.contains(event.target as Node)) closeMenu();
+
+// ── initMobileNavClose ────────────────────────────────────────────────────────
+// L'ouverture du menu mobile est gérée par data-ds-toggle="collapse" dans main.ts.
+// Ce handler referme le panneau repliable lorsqu'un lien de section est cliqué.
+const initMobileNavClose = (): void => {
+  const burger = $('#navbar-burger') as HTMLButtonElement | null;
+  const collapse = $('#navbar-collapse') as HTMLElement | null;
+
+  if (!burger || !collapse) return;
+
+  const navLinks = collapse.querySelectorAll<HTMLAnchorElement>('.nav-link');
+  navLinks.forEach((link) => {
+    link.addEventListener('click', () => {
+      if (collapse.classList.contains('show')) {
+        collapse.classList.remove('show');
+        burger.setAttribute('aria-expanded', 'false');
+      }
+    });
   });
 };
- 
+
 // ── initSmoothScroll ──────────────────────────────────────────────────────────
 // Intercept a[href^="#"], scrollIntoView smooth + history.pushState.
-// Le scroll-margin-top est géré en CSS — aucun calcul JS.
+// Le scroll-margin-block-start est géré en CSS — aucun calcul JS.
 const initSmoothScroll = (): void => {
   const anchors = $<HTMLAnchorElement>(
     'a[href^="#"]',
     true,
   ) as NodeListOf<HTMLAnchorElement> | null;
- 
+
   if (!anchors) return;
- 
+
   anchors.forEach((anchor) => {
     anchor.addEventListener('click', (event: MouseEvent) => {
       const href = anchor.getAttribute('href');
       if (!href || href === '#') return;
- 
+
       const target = document.querySelector<HTMLElement>(href);
       if (!target) return;
- 
+
       event.preventDefault();
       target.scrollIntoView({ behavior: 'smooth', block: 'start' });
       history.pushState(null, '', href);
     });
   });
 };
- 
+
 // ── initContactForm ───────────────────────────────────────────────────────────
 // Validation déléguée intégralement à Symfony (backend).
 // Côté client :
 //   - FormManager gère l'affichage des erreurs retournées par le serveur (422)
 //   - toggleLinkField assure l'UX du champ conditionnel link_proposition
 //   - fetchAPI envoie le payload JSON et reçoit la réponse structurée
- 
+
 // Subjects qui affichent le champ link_proposition — miroir de ContactSubject::requiresLink()
 const SUBJECTS_WITH_LINK = new Set(['job_offer', 'project_proposition']);
- 
+
 const initContactForm = (): void => {
-  const formEl = $('#contact-form') as HTMLFormElement;
+  const formEl = $('#contact-form') as HTMLFormElement | null;
   if (!formEl) return;
- 
-  const submitBtn = $('#contact-submit') as HTMLButtonElement;
-  const feedback = $('#contact-feedback') as HTMLElement;
+
+  const submitBtn = $('#contact-submit') as HTMLButtonElement | null;
+  const feedback = $('#contact-feedback') as HTMLElement | null;
   const action = formEl.dataset['action'] ?? '';
- 
+
   // ── FormManager ─────────────────────────────────────────────────────────────
   const manager = new FormManager({ form: formEl });
- 
+
   // ── Champ conditionnel link_proposition (UX uniquement) ─────────────────────
-  const subjectSelect = $('#contact-subject') as HTMLSelectElement;
-  const linkWrapper = $('#contact-link-wrapper') as HTMLElement;
-  const linkInput = $('#contact-link') as HTMLInputElement;
- 
+  const subjectSelect = $('#contact-subject') as HTMLSelectElement | null;
+  const linkWrapper = $('#contact-link-wrapper') as HTMLElement | null;
+  const linkInput = $('#contact-link') as HTMLInputElement | null;
+
   const toggleLinkField = (subject: string): void => {
     if (!linkWrapper || !linkInput) return;
- 
+
     const isRequired = SUBJECTS_WITH_LINK.has(subject);
- 
+
     if (isRequired) {
       linkWrapper.hidden = false;
       linkWrapper.setAttribute('aria-hidden', 'false');
@@ -131,68 +113,75 @@ const initContactForm = (): void => {
       linkInput.classList.remove('is-invalid', 'is-valid');
     }
   };
- 
+
   if (subjectSelect) {
     toggleLinkField(subjectSelect.value);
-    subjectSelect.addEventListener('change', () => toggleLinkField(subjectSelect.value));
+    subjectSelect.addEventListener('change', () =>
+      toggleLinkField(subjectSelect.value),
+    );
   }
- 
+
   // ── Helpers feedback ────────────────────────────────────────────────────────
   const setFeedback = (text: string, type: 'success' | 'error'): void => {
     if (!feedback) return;
     feedback.textContent = text;
-    feedback.className = `contact__feedback is-${type}`;
+    feedback.className = `contact-feedback is-${type}`;
   };
- 
+
   const clearFeedback = (): void => {
     if (!feedback) return;
     feedback.textContent = '';
-    feedback.className = 'contact__feedback';
+    feedback.className = 'contact-feedback';
   };
- 
+
   const setSubmitLoading = (loading: boolean): void => {
     if (!submitBtn) return;
     submitBtn.disabled = loading;
     submitBtn.textContent = loading ? 'Envoi en cours…' : 'Envoyer le message';
   };
- 
+
   // ── Soumission ───────────────────────────────────────────────────────────────
   formEl.addEventListener('submit', async (event: SubmitEvent) => {
     event.preventDefault();
     clearFeedback();
     setSubmitLoading(true);
- 
+
     try {
       const payload = manager.getData();
-      payload.consent_data_usage = ($('[name="consent_data_usage"]') as HTMLInputElement)?.checked ?? false;
- 
+      payload.consent_data_usage =
+        ($('[name="consent_data_usage"]') as HTMLInputElement)?.checked ??
+        false;
+
       // Retire link_proposition si le champ est masqué pour ne pas polluer le DTO
       if (linkWrapper?.hidden) {
         delete (payload as Record<string, unknown>)['link_proposition'];
       }
- 
+
+      // retries: 0 — un POST qui envoie des e-mails n'est pas idempotent : fetchAPI
+      // retente par défaut toute réponse non 2xx (422, 500…), soit 3 envois par clic
       const response = await fetchAPI<{ success: boolean; message?: string }>(
         action,
-        { method: 'POST', body: payload as unknown as BodyInit },
+        { method: 'POST', body: payload as unknown as BodyInit, retries: 0 },
       );
- 
+
       if (response.data.success) {
         setFeedback(
-          response.data.message ?? 'Votre message a bien été envoyé. Je vous répondrai rapidement !',
+          response.data.message ??
+            'Votre message a bien été envoyé. Je vous répondrai rapidement !',
           'success',
         );
         manager.reset();
         if (subjectSelect) toggleLinkField('');
       } else {
         setFeedback(
-          response.data.message ?? 'Une erreur est survenue. Veuillez réessayer.',
+          response.data.message ??
+            'Une erreur est survenue. Veuillez réessayer.',
           'error',
         );
       }
     } catch (error) {
       if (error instanceof ApiError) {
         // 422 — violations retournées par le Validator Symfony
-        // La clé des errors correspond au nom du champ HTML (snake_case)
         const serverViolations = error.getValidationErrors();
         if (serverViolations) {
           manager.validateData(serverViolations);
@@ -204,41 +193,21 @@ const initContactForm = (): void => {
           'error',
         );
       } else {
-        setFeedback('Erreur réseau. Vérifiez votre connexion et réessayez.', 'error');
+        setFeedback(
+          'Erreur réseau. Vérifiez votre connexion et réessayez.',
+          'error',
+        );
       }
     } finally {
       setSubmitLoading(false);
     }
   });
 };
- 
+
 // ── Bootstrap ─────────────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
   initNavbarScroll();
-  initBurger();
+  initMobileNavClose();
   initSmoothScroll();
   initContactForm();
-
-  const formContactSubjectEl = $('#contact-subject') as HTMLSelectElement;
-  const formContactPropositionLinkEl = $(
-    '#contact-link-wrapper',
-  ) as HTMLElement;
-
-  formContactPropositionLinkEl.style.display = 'none';
-
-  formContactSubjectEl.addEventListener('change', (event) => {
-    const selectedValue = (event.target as HTMLSelectElement).value;
-
-    if (['job_offer', 'project_proposition'].includes(selectedValue)) {
-      formContactPropositionLinkEl.style.display = 'block';
-    } else {
-      formContactPropositionLinkEl.style.display = 'none';
-      const formContactPropositionLinkInputEl = $(
-        '#contact-link',
-      ) as HTMLInputElement;
-      if (formContactPropositionLinkInputEl) {
-        formContactPropositionLinkInputEl.value = '';
-      }
-    }
-  });
 });

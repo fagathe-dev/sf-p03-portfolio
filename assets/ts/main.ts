@@ -1,32 +1,25 @@
 // =============================================================================
-// main.ts — Orchestrateur : initialisation des interactions globales
+// main.ts — Point d'entrée TypeScript global du Portfolio
+// -----------------------------------------------------------------------------
+// Initialise immédiatement le thème (clair / sombre / auto + surface glass)
+// et connecte le sélecteur de thème [data-ds-theme-switch].
+// Les interactions génériques du Design System (collapse, dropdown, modal,
+// segmented-control) sont prises en charge par {{ DESIGN_SYSTEM_URL }}/js/main.js.
 // =============================================================================
 
-import { toggleHandler, handleBackdropClick, dismissHandler, handleEscapeKey } from '@/interactions';
+import { themeService, initThemeSwitcher } from '@/services/theme';
 
-document.addEventListener('DOMContentLoaded', () => {
-  document.addEventListener('click', (event: MouseEvent) => {
-    const target = event.target as Element;
+const initPortfolioUI = (): void => {
+  // Assure l'application du thème courant sur <html>
+  document.documentElement.setAttribute('data-ui-theme', themeService.getTheme());
 
-    // Ouverture : [data-ds-toggle]
-    const toggleTrigger = target.closest<HTMLElement>('[data-ds-toggle]');
-    if (toggleTrigger) {
-      toggleHandler(toggleTrigger);
-    }
+  // Connecte le sélecteur de thème de la navbar
+  initThemeSwitcher();
+};
 
-    // Fermeture : [data-ds-dismiss]
-    const dismissTrigger = target.closest<HTMLElement>('[data-ds-dismiss]');
-    if (dismissTrigger) {
-      dismissHandler(dismissTrigger);
-    }
-
-    // Fermeture par clic sur le backdrop (dialog.modal uniquement)
-    if (event.target instanceof HTMLDialogElement) {
-      handleBackdropClick(event, event.target);
-    }
-  });
-
-  // Fermeture par Escape pour dialog.dialog (non géré nativement via show())
-  document.addEventListener('keydown', handleEscapeKey);
-});
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initPortfolioUI);
+} else {
+  initPortfolioUI();
+}
 

@@ -1,29 +1,39 @@
-<footer class="footer" role="contentinfo">
-  <div class="footer__inner">
-    <p class="footer__copy">&copy; {{ "now"|date("Y") }} {{ profile.fullName }}</p>
-    <ul class="footer__socials" aria-label="Réseaux sociaux">
-      {% for social in profile.socials %}
-        {% set finalLink = social.link %}
-        {% if social.presetMessage is defined %}
-          {% if social.name == 'Email' %}
-            {% set finalLink = finalLink ~ '?subject=Contact via Portfolio&body=' ~ social.presetMessage|url_encode %}
-          {% elseif social.name == 'WhatsApp' %}
-            {% set finalLink = finalLink ~ '?text=' ~ social.presetMessage|url_encode %}
-          {% endif %}
-        {% endif %}
+<footer class="footer app-footer" role="contentinfo">
+  <div class="container">
+    <div class="footer-content">
+      <p class="mb-0 text-muted">
+        &copy; {{ "now"|date("Y") }} {{ profile.fullName ?? APP_NAME }} —
+        <a href="{{ path('app_home_legal') }}" class="link-secondary">Mentions légales</a>
+      </p>
 
-        <li>
-          <a
-            href="{{ finalLink }}"
-            class="hero__social-link"
-            aria-label="{{ social.name }}"
-          {% if not (social.link starts with 'mailto') %}
-            target="_blank"
-            rel="noopener noreferrer"
-          {% endif %}
-          ><i class="{{ social.icon }}" aria-hidden="true"></i></a>
-        </li>
-      {% endfor %}
-    </ul>
+      {% if profile is defined and profile.socials is defined %}
+        <ul class="hero-socials pt-0" aria-label="Réseaux sociaux">
+          {% for social in profile.socials %}
+            {% set finalLink = social.link %}
+            {% if social.presetMessage is defined %}
+              {% if social.name == 'Email' %}
+                {% set finalLink = finalLink ~ '?subject=Contact via Portfolio&body=' ~ social.presetMessage|url_encode %}
+              {% elseif social.name == 'WhatsApp' %}
+                {% set finalLink = finalLink ~ '?text=' ~ social.presetMessage|url_encode %}
+              {% endif %}
+            {% endif %}
+
+            <li>
+              <a
+                href="{{ finalLink }}"
+                class="btn btn-icon btn-ghost-secondary btn-sm"
+                aria-label="{{ social.name }}"
+                {% if not (social.link starts with 'mailto') %}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                {% endif %}
+              >
+                <i class="{{ social.icon }}" aria-hidden="true"></i>
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
   </div>
 </footer>

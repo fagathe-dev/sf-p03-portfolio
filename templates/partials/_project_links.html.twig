@@ -1,0 +1,28 @@
+{# --- Liens d'un projet (GitHub + démo), partagés par la carte et la modale ---- #}
+
+{% if project.github %}
+  <a
+    href="{{ project.github }}"
+    class="btn btn-outline-secondary btn-sm"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Voir le code source de {{ project.name }} sur GitHub"
+  >
+    <i class="mdi mdi-github" aria-hidden="true"></i>
+    Code source
+  </a>
+{% endif %}
+{% if project.live_link %}
+  {# Libellé : live_label du JSON, sinon « Essayer » (ProjectDto::DEFAULT_LIVE_LABEL) #}
+  {% set live_label = project.getLiveLabel() %}
+  <a
+    href="{{ project.live_link }}"
+    class="btn btn-primary btn-sm"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="{{ live_label }} : {{ project.name }}, en ligne (nouvel onglet)"
+  >
+    <i class="ri-external-link-line" aria-hidden="true"></i>
+    {{ live_label }}
+  </a>
+{% endif %}

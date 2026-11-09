@@ -5,76 +5,45 @@ declare(strict_types=1);
 namespace App\Service\Mail;
 
 use App\Dto\ContactDto;
-use App\Dto\Enum\ContactSubjectEnum;
-use Symfony\Bridge\Twig\Mime\TemplatedEmail;
-use Symfony\Component\Mailer\MailerInterface;
-use Symfony\Component\Mime\Address;
+use App\Mail\ContactConfirmationHandler;
+use App\Mail\ContactNotificationHandler;
+use Fagathe\CorePhp\Mailer\Exception\MailerExceptionInterface;
 
 /**
- * Envoie les deux emails déclenchés à la soumission du formulaire de contact :
+ * Orchestre les deux e-mails du formulaire de contact, envoyés par le mailer de
+ * core-php (AbstractMailerHandler : validation, contrôle des destinataires, logs) :
  *
- *   1. Récapitulatif à l'utilisateur (confirmation de réception)
- *   2. Notification à Frédérick AGATHE (contenu complet du message)
+ *   1. ContactNotificationHandler : notification au propriétaire (contenu complet)
+ *   2. ContactConfirmationHandler : accusé de réception à l'auteur du message
  *
- * Les templates Twig sont dans templates/emails/.
- * Les adresses et le nom d'expéditeur sont injectés depuis les paramètres Symfony
- * (config/services.yaml) pour éviter les valeurs en dur.
+ * Les templates sont dans templates/emails/ et étendent @CorePhp/layout.html.twig.
  */
 final class ContactMailer
 {
     public function __construct(
-        private readonly MailerInterface $mailer,
-        private readonly string $ownerEmail = '',   // %app.owner_email%
-        private readonly string $ownerName = '',    // %app.owner_name%
-        private readonly string $senderEmail = '',  // %app.sender_email%  (noreply@…)
-        private readonly string $senderName = '',   // %app.sender_name%
-    ) {}
+        private readonly ContactNotificationHandler $notification,
+        private readonly ContactConfirmationHandler $confirmation,
+    ) {
+    }
 
     /**
-     * Envoie les deux emails de manière synchrone.
-     * Pour un envoi asynchrone, brancher Messenger sur le transport mailer.
+     * Envoie les deux e-mails de manière synchrone.
+     *
+     * @throws MailerExceptionInterface Si la notification au propriétaire échoue : le message
+     *                                  n'est pas parvenu, l'appelant doit le signaler
      */
     public function send(ContactDto $dto): void
     {
-        $this->sendConfirmationToUser($dto);
-        $this->sendNotificationToOwner($dto);
-    }
+        // 1. La notification d'abord : c'est le message lui-même. Si elle échoue,
+        //    l'exception remonte et l'auteur ne reçoit pas de faux accusé de réception.
+        $this->notification->send($dto);
 
-    // ── Email 1 : récapitulatif à l'utilisateur ───────────────────────────────
-
-    private function sendConfirmationToUser(ContactDto $dto): void
-    {
-        $email = (new TemplatedEmail())
-            ->from(new Address($this->senderEmail, $this->senderName))
-            ->to(new Address($dto->email, $dto->fullName))
-            ->replyTo(new Address($this->ownerEmail, $this->ownerName))
-            ->subject('Votre message a bien été reçu — ' . $this->ownerName)
-            ->htmlTemplate('emails/contact_confirmation.html.twig')
-            ->context([
-                'dto'       => $dto,
-                'ownerName' => $this->ownerName,
-            ]);
-
-        $this->mailer->send($email);
-    }
-
-    // ── Email 2 : notification au propriétaire du site ───────────────────────
-
-    private function sendNotificationToOwner(ContactDto $dto): void
-    {
-        $subjectLabel = ContactSubjectEnum::tryFrom($dto->subject)?->label() ?? 'Non précisé';
-
-        $email = (new TemplatedEmail())
-            ->from(new Address($this->senderEmail, $this->senderName))
-            ->to(new Address($this->ownerEmail, $this->ownerName))
-            ->replyTo(new Address($dto->email, $dto->fullName))
-            ->subject('[Portfolio] Nouveau message — ' . $subjectLabel . ' — ' . $dto->fullName)
-            ->htmlTemplate('emails/contact_notification.html.twig')
-            ->context([
-                'dto'         => $dto,
-                'subjectLabel' => $subjectLabel,
-            ]);
-
-        $this->mailer->send($email);
+        // 2. L'accusé de réception ensuite. Son échec (boîte pleine, domaine injoignable…)
+        //    n'est pas bloquant : le message est déjà arrivé, et une erreur inciterait
+        //    l'auteur à le renvoyer en double. core-php a déjà journalisé l'échec.
+        try {
+            $this->confirmation->send($dto);
+        } catch (MailerExceptionInterface) {
+        }
     }
 }

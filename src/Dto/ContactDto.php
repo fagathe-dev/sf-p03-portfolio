@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Dto;
 
+use App\Dto\Enum\ContactSubjectEnum;
 use App\Validator\Constraint\FrenchPhone;
 use Symfony\Component\Serializer\Attribute\SerializedName;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -60,7 +61,7 @@ final class ContactDto
 
     #[Assert\NotBlank(message: 'Le message est requis.')]
     #[Assert\Length(
-        min: 10,
+        min: 4,
         max: 2000,
         minMessage: 'Le message doit contenir au moins {{ limit }} caractères.',
         maxMessage: 'Le message ne peut pas dépasser {{ limit }} caractères.',
@@ -98,6 +99,14 @@ final class ContactDto
                 ->atPath('linkProposition')
                 ->addViolation();
         }
+    }
+
+    /**
+     * Libellé lisible du motif (« Offre d'emploi »…), utilisé par les e-mails de contact.
+     */
+    public function getSubjectLabel(): string
+    {
+        return ContactSubjectEnum::tryFrom($this->subject ?? '')?->label() ?? 'Non précisé';
     }
 
     private function requiresLinkSubject(): bool

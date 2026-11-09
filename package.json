@@ -19,18 +19,18 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com-perso:fagathe-dev/sf-p04-boilerplate.git"
+    "url": "https://github.com/fagathe-dev/sf-p03-portfolio.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "devDependencies": {
-    "concurrently": "^9.2.1",
-    "esbuild": "^0.28.0",
-    "sass": "^1.99.0",
-    "typescript": "^6.0.3"
+   "dependencies": {
+    "core-ts": "git+https://github.com/fagathe-dev/core-ts.git#master"
   },
-  "dependencies": {
-    "core-ts": "github:fagathe-dev/core-ts#master"
+  "devDependencies": {
+    "concurrently": "^9.2.4",
+    "esbuild": "^0.28.2",
+    "sass": "^1.105.0",
+    "typescript": "^6.0.3"
   }
 }

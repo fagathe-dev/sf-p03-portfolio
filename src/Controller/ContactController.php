@@ -6,7 +6,7 @@ namespace App\Controller;
 
 use App\Dto\ContactDto;
 use App\Service\Mail\ContactMailer;
-use Psr\Log\LoggerInterface;
+use Fagathe\CorePhp\Mailer\Exception\MailerExceptionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,7 +22,6 @@ final class ContactController extends AbstractController
         private readonly SerializerInterface $serializer,
         private readonly ValidatorInterface $validator,
         private readonly ContactMailer $contactMailer,
-        private readonly LoggerInterface $logger,
     ) {
     }
 
@@ -91,24 +90,21 @@ final class ContactController extends AbstractController
         }
 
         // ── 4. Traitement — envoi des emails ──────────────────────────────────
-        // try {
+        // Seules les erreurs du mailer core-php (SMTP injoignable, boîte pleine, domaine
+        // injoignable…) sont interceptées, déjà journalisées par AbstractMailerHandler
+        // dans logs/. Une erreur de configuration ou de code doit rester visible.
+        try {
             $this->contactMailer->send($dto);
-        // } catch (\Throwable $e) {
-        //     // Log l'erreur sans l'exposer au client
-        //     $this->logger->error(
-        //         'ContactMailer error: ' . $e->getMessage(),
-        //         ['exception' => $e],
-        //     );
-
-        //     return $this->json(
-        //         [
-        //             'success' => false,
-        //             'message' => 'Une erreur est survenue lors de l\'envoi. '
-        //                 . 'Veuillez réessayer ou me contacter directement.',
-        //         ],
-        //         Response::HTTP_INTERNAL_SERVER_ERROR,
-        //     );
-        // }
+        } catch (MailerExceptionInterface) {
+            return $this->json(
+                [
+                    'success' => false,
+                    'message' => 'Une erreur est survenue lors de l\'envoi. '
+                        . 'Veuillez réessayer ou me contacter directement.',
+                ],
+                Response::HTTP_INTERNAL_SERVER_ERROR,
+            );
+        }
 
         return $this->json([
             'success' => true,

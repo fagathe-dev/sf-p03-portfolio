@@ -2,9 +2,9 @@
 
 <ol class="timeline" aria-label="Parcours professionnel et formations">
   {% for item in timeline %}
-    <li class="timeline__item timeline__item--{{ item.type }}">
+    <li class="timeline-item" data-timeline-type="{{ item.type }}">
 
-      <div class="timeline__marker" aria-hidden="true">
+      <div class="timeline-marker" aria-hidden="true">
         {% if item.type == 'experience' %}
           <i class="mdi mdi-briefcase" aria-hidden="true"></i>
         {% else %}
@@ -12,13 +12,13 @@
         {% endif %}
       </div>
 
-      <div class="timeline__content">
+      <article class="timeline-card">
 
-        <header class="timeline__header">
-          <span class="timeline__type-badge">
+        <header class="timeline-header">
+          <span class="badge {{ item.type == 'experience' ? 'badge-soft-primary' : 'badge-soft-tertiary' }}">
             {{ item.type == 'experience' ? 'Expérience' : 'Formation' }}
           </span>
-          <span class="timeline__dates">
+          <span class="timeline-dates">
             {{ item.startDate|slice(5, 2) }}/{{ item.startDate|slice(0, 4) }}
             {% if item.endDate %}
               — {{ item.endDate|slice(5, 2) }}/{{ item.endDate|slice(0, 4) }}
@@ -28,34 +28,34 @@
           </span>
         </header>
 
-        <h3 class="timeline__title">{{ item.title }}</h3>
+        <h3 class="timeline-title">{{ item.title }}</h3>
 
-        <p class="timeline__org">
+        <p class="timeline-org">
           <span>{{ item.organization }}</span>
-          <span class="timeline__location">{{ item.location }}</span>
+          <span class="timeline-location">{{ item.location }}</span>
         </p>
 
         {% if item.description %}
-          <p class="timeline__description">{{ item.description }}</p>
+          <p class="timeline-description">{{ item.description }}</p>
         {% endif %}
 
         {% if item.highlights %}
-          <ul class="timeline__highlights" aria-label="Points clés">
+          <ul class="timeline-highlights" aria-label="Points clés">
             {% for highlight in item.highlights %}
-              <li class="timeline__highlight">{{ highlight }}</li>
+              <li>{{ highlight }}</li>
             {% endfor %}
           </ul>
         {% endif %}
 
         {% if item.stack %}
-          <ul class="timeline__stack" aria-label="Technologies utilisées">
+          <ul class="timeline-stack" aria-label="Technologies utilisées">
             {% for tech in item.stack %}
-              <li class="timeline__stack-tag">{{ tech }}</li>
+              <li class="chip chip-sm">{{ tech }}</li>
             {% endfor %}
           </ul>
         {% endif %}
 
-      </div>
+      </article>
     </li>
   {% endfor %}
 </ol>

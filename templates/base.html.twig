@@ -1,46 +1,45 @@
 <!doctype html>
-<html lang="fr">
+<html lang="fr" data-ui-surface="glass">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{% block title %}Portfolio{% endblock %}</title>
-  
 
   <link rel="icon" href="{{ asset(APP_FAVICON) }}" type="image/x-icon" />
 
-  {# Fonts Google : Inter + DM Mono #}
+  {# Polices Google Fonts : Inter (UI & Titres) + DM Mono (métadonnées techniques / industriel) #}
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=DM+Mono:ital,wght@0,400;0,500;1,400&display=swap"
-    rel="stylesheet"
-  />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500;600;700&display=swap" />
 
-  <!-- Custom Css-->
-  <link rel="stylesheet" href="{{ asset('assets/icons.min.css') }}" type="text/css" />
+  {# Design System (Mode CDN via DESIGN_SYSTEM_URL) #}
+  <link rel="stylesheet" href="{{ DESIGN_SYSTEM_URL }}/assets/ds-icons.css" type="text/css" />
+  <link rel="stylesheet" href="{{ DESIGN_SYSTEM_URL }}/css/ds-ui-kit.css" type="text/css" />
 
-  {# CSS global #}
-  <link rel="stylesheet" href="{{ asset('css/app.css') }}" />
+  {# Surcharge locale du Portfolio (Identité Brute / Industrielle + Glassmorphism) #}
+  <link rel="stylesheet" href="{{ asset('css/ds-portfolio.css') }}" type="text/css" />
 
   {% include 'partials/_seo.html.twig' %}
 
   {% block stylesheets %}{% endblock %}
 </head>
 
-<body class="{% block body_class %}{% endblock %}">
+<body class="layout-app {% block body_class %}{% endblock %}">
 
   {% block navbar %}
     {% include 'partials/_navbar.html.twig' ignore missing %}
   {% endblock %}
 
-  <main class="{% block main_class %}{% endblock %}" role="main">
+  <main class="flex-fill {% block main_class %}{% endblock %}" role="main">
     {% block body %}{% endblock %}
   </main>
 
-  {% include 'partials/_footer.html.twig' ignore missing %}
+  {% block footer %}
+    {% include 'partials/_footer.html.twig' ignore missing %}
+  {% endblock %}
 
-  {# JS global #}
-  <script src="{{ asset('js/main.js') }}" defer></script>
+  <script type="module" src="{{ DESIGN_SYSTEM_URL }}/js/main.js"></script>
+  <script type="module" src="{{ asset('js/main.js') }}"></script>
   {% block javascripts %}{% endblock %}
 </body>
 </html>

@@ -86,5 +86,29 @@
     "category": "other",
     "level": "intermediaire",
     "isHighlight": false
+  },
+  {
+    "id": "skl-12",
+    "label": "Claude Code",
+    "icon": "mdi-console",
+    "category": "ai",
+    "level": "confirmé",
+    "isHighlight": false
+  },
+  {
+    "id": "skl-13",
+    "label": "Google Antigravity",
+    "icon": "mdi-google",
+    "category": "ai",
+    "level": "intermediaire",
+    "isHighlight": false
+  },
+  {
+    "id": "skl-14",
+    "label": "Prompting",
+    "icon": "mdi-chat-processing-outline",
+    "category": "ai",
+    "level": "confirmé",
+    "isHighlight": false
   }
 ]

@@ -1,0 +1,1060 @@
+// ==========================================================================
+// Styles spécifiques du Portfolio (_portfolio.scss)
+// --------------------------------------------------------------------------
+// Complète les composants du Design System (chargés via CDN) avec les
+// éléments propres au portfolio : fond à trame industrielle + halo de
+// réfraction, Hero pleine largeur, Sections, Portrait & Stats Bento,
+// Compétences, Projets, Timeline et Contact.
+// Conformité : Zéro BEM, 3 niveaux de tokens, propriétés logiques,
+// transitions ciblées, max 2 niveaux d'imbrication.
+// ==========================================================================
+
+@use 'abstracts' as *;
+
+html {
+  scroll-behavior: smooth;
+
+  @include reduced-motion {
+    scroll-behavior: auto;
+  }
+}
+
+// Trame industrielle subtile + halos tonals pour la réfraction du verre dépoli
+:root[data-ui-surface='glass'] body {
+  background-image:
+    linear-gradient(to right, var(--ds-grid-line-color) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--ds-grid-line-color) 1px, transparent 1px),
+    radial-gradient(
+      circle at 15% 12%,
+      color-mix(in srgb, var(--ds-color-primary-container) 60%, transparent) 0%,
+      transparent 45%
+    ),
+    radial-gradient(
+      circle at 85% 38%,
+      color-mix(in srgb, var(--ds-color-secondary-container) 55%, transparent) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 22% 82%,
+      color-mix(in srgb, var(--ds-color-primary-container) 45%, transparent) 0%,
+      transparent 50%
+    );
+  background-size:
+    var(--ds-grid-size) var(--ds-grid-size),
+    var(--ds-grid-size) var(--ds-grid-size),
+    100% 100%,
+    100% 100%,
+    100% 100%;
+  background-attachment: fixed;
+}
+
+// --------------------------------------------------------------------------
+// Sections communes
+// --------------------------------------------------------------------------
+.section {
+  --section-py: var(--ds-space-16);
+  --section-bg: transparent;
+
+  position: relative;
+  padding-block: var(--section-py);
+  background-color: var(--section-bg);
+  scroll-margin-block-start: var(--ds-size-topbar);
+
+  @include media-up(lg) {
+    --section-py: var(--ds-space-24);
+  }
+}
+
+.section-tinted {
+  --section-bg: var(--ds-surface-container-low);
+
+  border-block: var(--ds-border-width) solid var(--ds-color-outline-variant);
+}
+
+.section-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-2);
+  padding-block-end: var(--ds-space-10);
+}
+
+.section-title {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-3);
+  margin: 0;
+  color: var(--ds-color-on-surface);
+  @include type(headline, lg);
+
+  // Trait d'accentuation brut / industriel sous le titre
+  &::after {
+    content: '';
+    display: block;
+    inline-size: var(--ds-space-8);
+    block-size: var(--ds-border-width-thick);
+    background-color: var(--ds-color-primary);
+  }
+}
+
+// --------------------------------------------------------------------------
+// Hero Portfolio — pleine largeur, image de fond
+// S'appuie sur .hero.hero-has-bg du Design System (voile ::before) et force
+// data-ui-theme="dark" dans le template pour que les tokens restent lisibles.
+// --------------------------------------------------------------------------
+.hero-portfolio {
+  --hero-portfolio-py: var(--ds-space-16);
+
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  min-block-size: calc(100vh - var(--ds-size-topbar));
+  min-block-size: calc(100dvh - var(--ds-size-topbar));
+  padding-block: var(--hero-portfolio-py);
+  padding-inline: 0;
+  border-radius: 0;
+  text-align: start;
+  scroll-margin-block-start: var(--ds-size-topbar);
+
+  // Voile en dégradé : opaque côté texte, plus léger côté illustration
+  &::before {
+    background-color: color-mix(in srgb, var(--ds-color-scrim) 70%, transparent);
+  }
+
+  // Le contenu passe au-dessus du voile (z-index 1 dans le Design System)
+  > .container {
+    position: relative;
+    z-index: 2;
+    inline-size: 100%;
+  }
+
+  @include media-up(lg) {
+    --hero-portfolio-py: var(--ds-space-20);
+
+    &::before {
+      background-color: transparent;
+      background-image: linear-gradient(
+        to right,
+        color-mix(in srgb, var(--ds-color-scrim) 85%, transparent) 0%,
+        color-mix(in srgb, var(--ds-color-scrim) 60%, transparent) 50%,
+        color-mix(in srgb, var(--ds-color-scrim) 25%, transparent) 100%
+      );
+    }
+  }
+}
+
+// Image de fond (srcset) sous le voile ::before (z-index 1)
+.hero-portfolio-img {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+  // 70 % garde le personnage (à droite de l'illustration) visible sur mobile
+  object-position: 70% center;
+}
+
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--ds-space-5);
+  max-inline-size: var(--ds-container-md);
+  text-align: start;
+}
+
+.status-dot {
+  display: inline-block;
+  inline-size: var(--ds-space-2);
+  block-size: var(--ds-space-2);
+  border-radius: var(--ds-radius-full);
+  background-color: var(--ds-color-success);
+}
+
+.hero-subtitle {
+  margin: 0;
+  color: var(--ds-color-on-surface-variant);
+  font-family: var(--ds-font-mono);
+  @include type(title, lg);
+}
+
+.hero-tagline {
+  max-inline-size: var(--ds-size-reading);
+  margin: 0;
+  color: var(--ds-color-on-surface);
+  @include type(body, lg);
+  line-height: var(--ds-line-height-relaxed);
+
+  strong {
+    color: var(--ds-color-primary);
+    font-weight: var(--ds-font-weight-semibold);
+  }
+}
+
+.hero-location {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+  margin: 0;
+  color: var(--ds-color-on-surface-variant);
+  font-family: var(--ds-font-mono);
+  @include type(label, lg);
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--ds-space-3);
+  padding-block-start: var(--ds-space-2);
+}
+
+.hero-socials {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--ds-space-2_5);
+  margin: 0;
+  padding: 0;
+  padding-block-start: var(--ds-space-2);
+  list-style: none;
+}
+
+.hero-scroll-hint {
+  display: none;
+  justify-content: center;
+  margin-inline: auto;
+  padding-block-start: var(--ds-space-12);
+  color: var(--ds-color-on-surface-variant);
+  text-decoration: none;
+
+  @include media-up(lg) {
+    display: inline-flex;
+  }
+}
+
+.hero-scroll-line {
+  display: block;
+  inline-size: var(--ds-border-width-thick);
+  block-size: var(--ds-space-10);
+  border-radius: var(--ds-radius-full);
+  background-color: var(--ds-color-outline-variant);
+  transform-origin: top;
+  transition: effects(background-color);
+  animation: hero-scroll-line 2s var(--ds-ease-spatial) infinite;
+
+  .hero-scroll-hint:hover & {
+    background-color: var(--ds-color-primary);
+  }
+
+  @include reduced-motion {
+    animation: none;
+  }
+}
+
+// Indicateur de défilement : la barre se dessine de haut en bas, puis s'efface
+// vers le bas (changement d'origine pendant le palier, invisible à l'échelle 1)
+@keyframes hero-scroll-line {
+  0% {
+    transform: scaleY(0);
+    transform-origin: top;
+  }
+
+  45% {
+    transform: scaleY(1);
+    transform-origin: top;
+  }
+
+  55% {
+    transform: scaleY(1);
+    transform-origin: bottom;
+  }
+
+  100% {
+    transform: scaleY(0);
+    transform-origin: bottom;
+  }
+}
+
+// --------------------------------------------------------------------------
+// Section : À propos & Chiffres clés (Grille industrielle + Verre dépoli)
+// --------------------------------------------------------------------------
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: start;
+  gap: var(--ds-space-10);
+
+  @include media-up(lg) {
+    grid-template-columns: 5fr 7fr;
+    gap: var(--ds-space-12);
+  }
+}
+
+// Portrait : cadre en verre dépoli + ombre brute, recadré au format 4:5
+.about-portrait {
+  position: relative;
+  inline-size: 100%;
+  max-inline-size: var(--ds-container-sm);
+  margin: 0;
+  padding: var(--ds-space-2_5);
+  border-radius: var(--ds-radius-md);
+  background-color: var(--ds-surface-container);
+  @include glass-surface(var(--ds-glass-blur-md));
+  box-shadow: var(--ds-glass-highlight), var(--ds-shadow-brutal);
+  transition:
+    effects(border-color, box-shadow),
+    spatial(border-radius, transform);
+
+  &:hover {
+    border-color: var(--ds-glass-border-hover);
+    box-shadow: var(--ds-glass-highlight), var(--ds-shadow-brutal-primary);
+    transform: translateY(-2px);
+  }
+
+  @include media-up(lg) {
+    max-inline-size: none;
+  }
+
+  @include reduced-motion {
+    &:hover {
+      transform: none;
+    }
+  }
+}
+
+.about-portrait-img {
+  display: block;
+  inline-size: 100%;
+  block-size: auto;
+  aspect-ratio: 4 / 5;
+  border-radius: var(--ds-radius-sm);
+  // Fichiers déjà recadrés au 4:5 autour du visage (portrait-*.webp)
+  object-fit: cover;
+}
+
+.about-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-6);
+}
+
+.about-bio {
+  max-inline-size: var(--ds-size-reading);
+  color: var(--ds-color-on-surface);
+  @include type(body, lg);
+  line-height: var(--ds-line-height-relaxed);
+
+  strong {
+    color: var(--ds-color-primary);
+    font-weight: var(--ds-font-weight-semibold);
+  }
+
+  em {
+    color: var(--ds-color-on-surface-variant);
+  }
+}
+
+.about-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--ds-space-3);
+}
+
+// Chiffres clés : rangée pleine largeur sous le portrait et la bio
+.about-stats {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--ds-space-4);
+
+  @include media-up(lg) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.stat-card {
+  --stat-bg: var(--ds-surface-container);
+  --stat-border-color: var(--ds-color-outline-variant);
+  --stat-color: var(--ds-color-on-surface);
+  --stat-value-color: var(--ds-color-primary);
+  --stat-radius: var(--ds-radius-md);
+  --stat-padding: var(--ds-space-6);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--ds-space-1_5);
+  padding: var(--stat-padding);
+  border-radius: var(--stat-radius);
+  background-color: var(--stat-bg);
+  color: var(--stat-color);
+  @include glass-surface(var(--ds-glass-blur-md));
+  border-color: var(--stat-border-color);
+  transition:
+    effects(background-color, border-color, box-shadow),
+    spatial(border-radius, transform);
+
+  &:hover {
+    --stat-border-color: var(--ds-glass-border-hover);
+
+    background-color: state-layer(var(--stat-bg), var(--stat-color));
+    box-shadow: var(--ds-glass-highlight), var(--ds-shadow-brutal);
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    border-radius: var(--ds-radius-xs);
+    transform: translateY(0);
+  }
+}
+
+.stat-value {
+  color: var(--stat-value-color);
+  font-family: var(--ds-font-mono);
+  @include type(headline, md);
+  font-weight: var(--ds-font-weight-bold);
+}
+
+.stat-label {
+  color: var(--ds-color-on-surface-variant);
+  font-family: var(--ds-font-mono);
+  text-transform: uppercase;
+  @include type(label, sm);
+  letter-spacing: var(--ds-letter-spacing-caps);
+}
+
+// --------------------------------------------------------------------------
+// Section : Compétences
+// --------------------------------------------------------------------------
+.skills-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-10);
+}
+
+.skills-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-4);
+}
+
+.skills-group-title {
+  margin: 0;
+  color: var(--ds-color-on-surface-variant);
+  font-family: var(--ds-font-mono);
+  text-transform: uppercase;
+  @include type(label, lg);
+  letter-spacing: var(--ds-letter-spacing-caps);
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+  gap: var(--ds-space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.skill-card {
+  --skill-bg: var(--ds-surface-container);
+  --skill-border-color: var(--ds-color-outline-variant);
+  --skill-color: var(--ds-color-on-surface);
+  --skill-icon-color: var(--ds-color-on-surface);
+  --skill-radius: var(--ds-radius-md);
+
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-3);
+  padding-block: var(--ds-space-4);
+  padding-inline: var(--ds-space-4);
+  border-radius: var(--skill-radius);
+  background-color: var(--skill-bg);
+  color: var(--skill-color);
+  @include glass-surface(var(--ds-glass-blur-md));
+  border-color: var(--skill-border-color);
+  transition:
+    effects(background-color, border-color, box-shadow),
+    spatial(border-radius, transform);
+
+  &:hover {
+    --skill-border-color: var(--ds-glass-border-hover);
+
+    background-color: state-layer(var(--skill-bg), var(--skill-color));
+    box-shadow: var(--ds-glass-highlight), var(--ds-shadow-brutal);
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    border-radius: var(--ds-radius-xs);
+    transform: translateY(0);
+  }
+
+  &.is-highlighted {
+    --skill-bg: color-mix(in srgb, var(--ds-color-primary-container) 55%, var(--ds-surface-container));
+    --skill-border-color: var(--ds-color-primary);
+    --skill-icon-color: var(--ds-color-primary);
+  }
+}
+
+.skill-icon {
+  flex-shrink: 0;
+  color: var(--skill-icon-color);
+  font-size: var(--ds-icon-size-lg);
+  line-height: 1;
+}
+
+// Libellé au-dessus du niveau : le badge ne dispute plus la largeur au libellé
+// et ne peut plus déborder de la carte, quelle que soit la longueur du texte
+.skill-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--ds-space-1_5);
+  min-inline-size: 0;
+}
+
+.skill-label {
+  color: var(--skill-color);
+  font-family: var(--ds-font-mono);
+  overflow-wrap: anywhere;
+  @include type(label, lg);
+}
+
+.skill-level {
+  font-size: var(--ds-text-label-sm);
+  letter-spacing: var(--ds-letter-spacing-caps);
+  text-transform: uppercase;
+}
+
+// --------------------------------------------------------------------------
+// Section : Projets
+// --------------------------------------------------------------------------
+.projects-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--ds-space-6);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  @include media-up(md) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include media-up(xl) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.project-card {
+  block-size: 100%;
+}
+
+.project-thumbnail {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  border-block-end: var(--ds-border-width) solid var(--ds-color-outline-variant);
+  background-color: var(--ds-surface-container-low);
+}
+
+.project-img {
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+  transition: spatial(transform);
+
+  .project-card:hover & {
+    transform: scale(1.04);
+  }
+
+  @include reduced-motion {
+    transition: none;
+
+    .project-card:hover & {
+      transform: none;
+    }
+  }
+}
+
+.project-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ds-space-2);
+  padding-block-end: var(--ds-space-2);
+}
+
+.project-date {
+  color: var(--ds-color-on-surface-variant);
+  font-family: var(--ds-font-mono);
+  @include type(label, sm);
+}
+
+.project-excerpt {
+  margin-block: 0 var(--ds-space-4);
+  color: var(--ds-color-on-surface-variant);
+  @include type(body, md);
+}
+
+.project-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ds-space-1_5);
+  margin: 0;
+  padding: 0;
+  padding-block-start: var(--ds-space-2);
+  list-style: none;
+}
+
+.project-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--ds-space-2_5);
+  margin-block-start: auto;
+  padding-block: var(--ds-space-4) var(--ds-space-6);
+  padding-inline: var(--ds-space-6);
+  border-block-start: var(--ds-border-width) solid var(--ds-color-outline-variant);
+}
+
+// --------------------------------------------------------------------------
+// Modale de détail d'un projet (dialog.modal du Design System)
+// --------------------------------------------------------------------------
+.project-modal {
+  // Plus large que la modale par défaut (37.5rem) pour la capture d'écran
+  --ds-size-dialog: var(--ds-container-md);
+
+  // Hauteur bornée : seul .modal-body défile, en-tête et pied restent visibles
+  max-block-size: calc(100dvh - var(--ds-space-8));
+}
+
+.project-modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-5);
+}
+
+.project-modal-img {
+  display: block;
+  inline-size: 100%;
+  block-size: auto;
+  aspect-ratio: 16 / 9;
+  border: var(--ds-border-width) solid var(--ds-color-outline-variant);
+  border-radius: var(--ds-radius-sm);
+  background-color: var(--ds-surface-container-low);
+  object-fit: cover;
+  object-position: top center;
+}
+
+.project-modal-meta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-3);
+
+  .project-date {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--ds-space-1_5);
+  }
+
+  .project-stack {
+    padding-block-start: 0;
+  }
+}
+
+// Description Markdown (paragraphes, listes, gras, code) : espacement par gap
+.project-description {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-3);
+  color: var(--ds-color-on-surface);
+  @include type(body, lg);
+  line-height: var(--ds-line-height-relaxed);
+
+  > p,
+  > ul,
+  > ol {
+    margin: 0;
+  }
+
+  > ul,
+  > ol {
+    display: flex;
+    flex-direction: column;
+    gap: var(--ds-space-2);
+    padding-inline-start: var(--ds-space-5);
+  }
+
+  strong {
+    color: var(--ds-color-primary);
+    font-weight: var(--ds-font-weight-semibold);
+  }
+
+  code {
+    font-family: var(--ds-font-mono);
+    font-size: var(--ds-text-body-md);
+  }
+}
+
+// --------------------------------------------------------------------------
+// Section : Parcours (Timeline industrielle)
+// --------------------------------------------------------------------------
+.timeline {
+  --timeline-line-color: var(--ds-color-outline-variant);
+  --timeline-marker-size: var(--ds-control-height-md);
+
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-8);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset-block: var(--ds-space-2);
+    inset-inline-start: calc(var(--timeline-marker-size) / 2 - var(--ds-border-width));
+    inline-size: var(--ds-border-width);
+    background-color: var(--timeline-line-color);
+  }
+}
+
+.timeline-item {
+  --timeline-accent-bg: var(--ds-surface-container);
+  --timeline-accent-color: var(--ds-color-on-surface-variant);
+  --timeline-accent-border: var(--ds-color-outline-variant);
+
+  position: relative;
+  display: grid;
+  grid-template-columns: var(--timeline-marker-size) 1fr;
+  align-items: start;
+  gap: var(--ds-space-4);
+
+  &[data-timeline-type='experience'] {
+    --timeline-accent-bg: var(--ds-color-primary-container);
+    --timeline-accent-color: var(--ds-color-primary);
+    --timeline-accent-border: var(--ds-color-primary);
+  }
+
+  @include media-up(md) {
+    gap: var(--ds-space-6);
+  }
+}
+
+.timeline-marker {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: var(--timeline-marker-size);
+  block-size: var(--timeline-marker-size);
+  border: var(--ds-border-width) solid var(--timeline-accent-border);
+  border-radius: var(--ds-radius-sm);
+  background-color: var(--timeline-accent-bg);
+  color: var(--timeline-accent-color);
+  font-size: var(--ds-icon-size-md);
+}
+
+.timeline-card {
+  --timeline-card-bg: var(--ds-surface-container);
+  --timeline-card-border: var(--ds-color-outline-variant);
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-3);
+  padding: var(--ds-space-6);
+  border-radius: var(--ds-radius-md);
+  background-color: var(--timeline-card-bg);
+  color: var(--ds-color-on-surface);
+  @include glass-surface(var(--ds-glass-blur-md));
+  border-color: var(--timeline-card-border);
+  transition:
+    effects(background-color, border-color, box-shadow),
+    spatial(transform);
+
+  &:hover {
+    --timeline-card-border: var(--ds-glass-border-hover);
+
+    background-color: state-layer(var(--timeline-card-bg), var(--ds-color-on-surface));
+    box-shadow: var(--ds-glass-highlight), var(--ds-shadow-brutal);
+    transform: translateY(-2px);
+  }
+}
+
+.timeline-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ds-space-2);
+}
+
+.timeline-dates {
+  color: var(--ds-color-on-surface-variant);
+  font-family: var(--ds-font-mono);
+  @include type(label, sm);
+}
+
+.timeline-title {
+  margin: 0;
+  color: var(--ds-color-on-surface);
+  @include type(title, lg);
+}
+
+.timeline-org {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--ds-space-2);
+  margin: 0;
+  color: var(--ds-color-primary);
+  font-family: var(--ds-font-mono);
+  @include type(label, md);
+}
+
+.timeline-location {
+  color: var(--ds-color-on-surface-variant);
+  font-weight: var(--ds-font-weight-regular);
+
+  &::before {
+    content: '· ';
+  }
+}
+
+.timeline-description {
+  margin: 0;
+  color: var(--ds-color-on-surface-variant);
+  @include type(body, md);
+}
+
+.timeline-highlights {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-1_5);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--ds-color-on-surface);
+  @include type(body, md);
+
+  > li {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--ds-space-2);
+
+    &::before {
+      content: '→';
+      flex-shrink: 0;
+      color: var(--ds-color-primary);
+      font-family: var(--ds-font-mono);
+    }
+  }
+}
+
+.timeline-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ds-space-1_5);
+  margin: 0;
+  padding: 0;
+  padding-block-start: var(--ds-space-2);
+  list-style: none;
+}
+
+// --------------------------------------------------------------------------
+// Section : Contact
+// --------------------------------------------------------------------------
+.contact-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-8);
+}
+
+.contact-intro {
+  max-inline-size: var(--ds-size-reading);
+}
+
+.contact-text {
+  margin: 0;
+  color: var(--ds-color-on-surface-variant);
+  @include type(body, lg);
+}
+
+.contact-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: start;
+  gap: var(--ds-space-8);
+
+  @include media-up(lg) {
+    grid-template-columns: 7fr 5fr;
+    gap: var(--ds-space-10);
+  }
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-5);
+  padding: var(--ds-space-6);
+  border-radius: var(--ds-radius-md);
+  background-color: var(--ds-surface-container);
+  @include glass-surface(var(--ds-glass-blur-md));
+
+  @include media-up(md) {
+    padding: var(--ds-space-8);
+  }
+}
+
+.contact-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--ds-space-4);
+
+  @include media-up(md) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.contact-field {
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-required {
+  color: var(--ds-color-error);
+}
+
+.contact-optional {
+  color: var(--ds-color-on-surface-variant);
+  font-weight: var(--ds-font-weight-regular);
+  @include type(label, sm);
+}
+
+.contact-hint {
+  padding-block-start: var(--ds-space-1);
+  color: var(--ds-color-on-surface-variant);
+  font-family: var(--ds-font-mono);
+  @include type(label, sm);
+}
+
+.contact-consent-label {
+  color: var(--ds-color-on-surface-variant);
+  @include type(body, sm);
+}
+
+.contact-submit {
+  display: flex;
+  align-items: center;
+  padding-block-start: var(--ds-space-2);
+}
+
+.contact-feedback {
+  display: none;
+  padding-block: var(--ds-space-3);
+  padding-inline: var(--ds-space-4);
+  border: var(--ds-border-width) solid transparent;
+  border-radius: var(--ds-radius-sm);
+  font-family: var(--ds-font-mono);
+  @include type(body, sm);
+
+  &.is-success {
+    display: block;
+    border-color: var(--ds-color-success);
+    background-color: var(--ds-color-success-container);
+    color: var(--ds-color-on-success-container);
+  }
+
+  &.is-error {
+    display: block;
+    border-color: var(--ds-color-error);
+    background-color: var(--ds-color-error-container);
+    color: var(--ds-color-on-error-container);
+  }
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-3);
+  padding: var(--ds-space-6);
+  border-radius: var(--ds-radius-md);
+  background-color: var(--ds-surface-container);
+  @include glass-surface(var(--ds-glass-blur-md));
+
+  @include media-up(md) {
+    padding: var(--ds-space-8);
+  }
+}
+
+.contact-social-link {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-3);
+  min-block-size: var(--ds-control-height-lg);
+  padding-inline: var(--ds-space-4);
+  border-radius: var(--ds-radius-sm);
+  background-color: var(--ds-surface-container-low);
+  color: var(--ds-color-on-surface);
+  font-family: var(--ds-font-mono);
+  text-decoration: none;
+  @include glass-surface(var(--ds-glass-blur-sm));
+  @include type(label, lg);
+  transition:
+    effects(background-color, border-color, color, box-shadow),
+    spatial(transform);
+
+  &:hover {
+    border-color: var(--ds-glass-border-hover);
+    background-color: state-layer(var(--ds-surface-container-low), var(--ds-color-on-surface));
+    color: var(--ds-color-primary);
+    box-shadow: var(--ds-glass-highlight), var(--ds-shadow-brutal);
+    text-decoration: none;
+    transform: translateY(-2px);
+  }
+
+  &:focus-visible {
+    @include focus-ring;
+  }
+
+  > i {
+    color: var(--ds-color-primary);
+    font-size: var(--ds-icon-size-lg);
+  }
+}
+
+.contact-location {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+  margin: 0;
+  padding-block-start: var(--ds-space-3);
+  border-block-start: var(--ds-border-width) solid var(--ds-color-outline-variant);
+  color: var(--ds-color-on-surface-variant);
+  font-family: var(--ds-font-mono);
+  @include type(label, md);
+
+  > i {
+    color: var(--ds-color-primary);
+    font-size: var(--ds-icon-size-md);
+  }
+}
+
+// --------------------------------------------------------------------------
+// Mentions légales
+// --------------------------------------------------------------------------
+.legal-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-6);
+  max-inline-size: var(--ds-container-md);
+  margin-inline: auto;
+}

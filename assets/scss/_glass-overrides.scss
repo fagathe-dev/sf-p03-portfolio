@@ -1,0 +1,264 @@
+// ==========================================================================
+// Surcouche des composants du Design System (_glass-overrides.scss)
+// --------------------------------------------------------------------------
+// Applique @mixin glass-surface et ajuste les Component Tokens sur les
+// composants chargés depuis le CDN ({{ DESIGN_SYSTEM_URL }}/css/ds-ui-kit.css),
+// conformément aux directives de migration.prompt.md :
+//   1. Navigation / Header / Floating Bars
+//   2. Cards (Projets, Bento, Articles, Boîtes, Accordéons, Listes)
+//   3. Modales / Drawers / Popovers
+//   4. Chips / Filtres / Boutons secondaires (Tonal / Outlined) vs Primary 100% opaque
+//   5. Inputs / Champs de formulaire
+// ==========================================================================
+
+@use 'abstracts' as *;
+
+// --------------------------------------------------------------------------
+// 1. Navigation / Header / Floating Bars (--ds-surface-container-high + blur-lg)
+// --------------------------------------------------------------------------
+.navbar,
+.toast {
+  --navbar-bg: var(--ds-surface-container-high);
+  --toast-bg: var(--ds-surface-container-high);
+
+  @include glass-surface(var(--ds-glass-blur-lg));
+  transition: effects(background-color, border-color, box-shadow);
+}
+
+.navbar {
+  border-inline: none;
+  border-block-start: none;
+}
+
+.app-header.is-scrolled .navbar,
+.navbar.is-scrolled {
+  --navbar-bg: var(--ds-surface-container-highest);
+
+  border-block-end-color: var(--ds-glass-border-hover);
+}
+
+// Liens de navigation au caractère technique / industriel (DM Mono)
+.navbar-nav .nav-link {
+  font-family: var(--ds-font-mono);
+  font-size: var(--ds-text-label-lg);
+}
+
+// --------------------------------------------------------------------------
+// 2. Cards, Boxes, Accordions, List Groups (--ds-surface-container + blur-md)
+// --------------------------------------------------------------------------
+.card {
+  --card-bg: var(--ds-surface-container);
+  --card-border-color: var(--ds-color-outline-variant);
+  --card-radius: var(--ds-radius-md);
+  --card-radius-active: var(--ds-radius-xs);
+
+  @include glass-surface(var(--ds-glass-blur-md));
+  border-color: var(--card-border-color);
+  transition:
+    effects(background-color, border-color, box-shadow),
+    spatial(border-radius, transform);
+
+  &:hover {
+    --card-border-color: var(--ds-glass-border-hover);
+  }
+}
+
+.card-elevated {
+  &:hover {
+    --card-border-color: var(--ds-glass-border-hover);
+
+    background-color: state-layer(var(--card-bg), var(--ds-color-on-surface));
+    box-shadow: var(--ds-glass-highlight), var(--ds-shadow-brutal);
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    border-radius: var(--card-radius-active);
+    background-color: state-layer(var(--card-bg), var(--ds-color-on-surface), 'pressed');
+    transform: translateY(0);
+  }
+
+  @include reduced-motion {
+    &:hover,
+    &:active {
+      transform: none;
+    }
+  }
+}
+
+.box,
+.accordion,
+.list-group,
+.auth-card {
+  --box-bg: var(--ds-surface-container);
+  --accordion-bg: var(--ds-surface-container);
+  --list-group-bg: var(--ds-surface-container);
+
+  @include glass-surface(var(--ds-glass-blur-md));
+}
+
+// --------------------------------------------------------------------------
+// 3. Modales / Drawers / Popovers (--ds-surface-container-highest + blur-lg)
+// --------------------------------------------------------------------------
+dialog,
+.dropdown-menu,
+.sidebar {
+  --dialog-bg: var(--ds-surface-container-highest);
+  --dropdown-bg: var(--ds-surface-container-highest);
+
+  background-color: var(--ds-surface-container-highest);
+  @include glass-surface(var(--ds-glass-blur-lg));
+}
+
+// --------------------------------------------------------------------------
+// 4. Chips / Filtres / Boutons secondaires (--ds-surface-container-low + blur-sm)
+//    et Boutons Primary 100 % opaques (point focal fort + accent industriel)
+// --------------------------------------------------------------------------
+.chip {
+  --chip-bg: var(--ds-surface-container-low);
+  --chip-color: var(--ds-color-on-surface);
+  --chip-border-color: var(--ds-color-outline-variant);
+  --chip-radius: var(--ds-radius-xs);
+
+  font-family: var(--ds-font-mono);
+  @include glass-surface(var(--ds-glass-blur-sm));
+  border-color: var(--chip-border-color);
+  transition:
+    effects(background-color, color, border-color, box-shadow),
+    spatial(border-radius);
+
+  &:hover {
+    --chip-border-color: var(--ds-glass-border-hover);
+
+    background-color: state-layer(var(--chip-bg), var(--chip-color));
+  }
+
+  &.is-selected,
+  &[aria-selected='true'] {
+    --chip-bg: var(--ds-color-primary);
+    --chip-color: var(--ds-color-on-primary);
+    --chip-border-color: transparent;
+
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
+
+.chip-sm {
+  block-size: calc(var(--ds-control-height-sm) - var(--ds-space-1));
+  padding-inline: var(--ds-space-2_5);
+  font-size: var(--ds-text-label-sm);
+}
+
+.segmented-control,
+.page-link {
+  --segmented-bg: var(--ds-surface-container-low);
+  --page-link-bg: var(--ds-surface-container-low);
+
+  @include glass-surface(var(--ds-glass-blur-sm));
+}
+
+.btn {
+  --btn-radius: var(--ds-radius-sm);
+  --btn-radius-active: var(--ds-radius-xs);
+
+  font-family: var(--ds-font-mono);
+  transition:
+    effects(background-color, color, border-color, box-shadow),
+    spatial(border-radius, transform);
+
+  &:active:not(:disabled) {
+    border-radius: var(--btn-radius-active);
+  }
+}
+
+@each $role, $token in $roles {
+  .btn-soft-#{$role} {
+    --btn-bg: color-mix(in srgb, #{role-color($role, 'container')} 55%, var(--ds-surface-container-low));
+    --btn-color: #{role-color($role, 'on-container')};
+    --btn-border-color: var(--ds-color-outline-variant);
+
+    @include glass-surface(var(--ds-glass-blur-sm));
+    border-color: var(--btn-border-color);
+
+    &:hover:not(:disabled) {
+      --btn-border-color: var(--ds-glass-border-hover);
+
+      box-shadow: var(--ds-glass-highlight), var(--ds-shadow-brutal);
+      transform: translateY(-2px);
+    }
+  }
+
+  .btn-outline-#{$role} {
+    --btn-bg: var(--ds-surface-container-low);
+    --btn-color: #{role-color($role)};
+    --btn-border-color: var(--ds-color-outline);
+
+    @include glass-surface(var(--ds-glass-blur-sm));
+    border-color: var(--btn-border-color);
+
+    &:hover:not(:disabled) {
+      --btn-border-color: var(--ds-glass-border-hover);
+
+      box-shadow: var(--ds-glass-highlight), var(--ds-shadow-brutal);
+      transform: translateY(-2px);
+    }
+  }
+}
+
+// Boutons pleins (Primary, Solid) : 100 % opaques avec ombre franche au survol
+$_solid-order: ('primary', 'secondary', 'tertiary', 'warning', 'info', 'success', 'danger');
+
+@each $role in $_solid-order {
+  .btn-#{$role},
+  .btn-solid-#{$role} {
+    --btn-bg: #{role-color($role)};
+    --btn-color: #{role-color($role, 'on')};
+    --btn-border-color: #{role-color($role)};
+
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+
+    &:hover:not(:disabled) {
+      box-shadow: var(--ds-shadow-brutal-primary);
+      transform: translateY(-2px);
+    }
+  }
+}
+
+.badge {
+  font-family: var(--ds-font-mono);
+}
+
+// --------------------------------------------------------------------------
+// 5. Inputs / Champs de formulaire (--ds-surface-container-low + focus-ring)
+// --------------------------------------------------------------------------
+.form-label {
+  font-family: var(--ds-font-mono);
+}
+
+.form-control,
+.form-select {
+  --input-bg: var(--ds-surface-container-low);
+  --input-border-color: var(--ds-color-outline);
+  --input-radius: var(--ds-radius-sm);
+
+  -webkit-backdrop-filter: blur(var(--ds-glass-blur-sm)) saturate(var(--ds-glass-saturate));
+  backdrop-filter: blur(var(--ds-glass-blur-sm)) saturate(var(--ds-glass-saturate));
+  transition: effects(border-color, background-color, box-shadow);
+
+  &:focus-visible {
+    --input-border-color: var(--ds-color-primary);
+
+    @include focus-ring;
+  }
+}
+
+.footer {
+  --footer-bg: var(--ds-surface-container);
+
+  @include glass-surface(var(--ds-glass-blur-md));
+  border-inline: none;
+  border-block-end: none;
+  font-family: var(--ds-font-mono);
+}

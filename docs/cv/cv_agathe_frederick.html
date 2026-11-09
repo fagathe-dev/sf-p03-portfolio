@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>CV – Frédérick AGATHE – Développeur Fullstack PHP/Symfony & React</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Open+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  /* Couleurs alignées sur le Design System (rôle primary, thème clair) */
+  :root {
+    --primary: #4b3fd8;            /* indigo-600  → --ds-color-primary */
+    --primary-container: #e5e0fa;  /* indigo-100  → --ds-color-primary-container */
+    --on-primary-container: #2b237a; /* indigo-900 → --ds-color-on-primary-container */
+    --text: #0f172b;               /* slate-900   → --ds-color-on-surface */
+    --muted: #475569;              /* slate-600   → --ds-color-on-surface-variant */
+    --line: #cbd5e1;               /* slate-300   → --ds-color-outline-variant */
+    --sidebar-bg: #f8fafc;         /* slate-50    → --ds-surface */
+  }
+
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: #fff; }
+  body {
+    font-family: 'Open Sans', 'Segoe UI', Arial, sans-serif;
+    font-size: 8.8pt;
+    line-height: 1.38;
+    color: var(--text);
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  .page {
+    width: 210mm;
+    height: 297mm;
+    display: grid;
+    grid-template-columns: 1fr 66mm;
+    grid-template-rows: auto 1fr;
+    overflow: hidden;
+  }
+
+  /* ---------- En-tête ---------- */
+  header {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 8mm;
+    padding: 9mm 13mm 5mm;
+    border-bottom: 2.5pt solid var(--primary);
+  }
+  h1 {
+    font-family: 'Merriweather', Georgia, serif;
+    font-size: 23pt;
+    line-height: 1.1;
+    font-weight: 700;
+    letter-spacing: -0.2pt;
+  }
+  .headline {
+    margin-top: 2mm;
+    font-size: 11.5pt;
+    font-weight: 600;
+    color: var(--primary);
+  }
+  .contact {
+    list-style: none;
+    text-align: right;
+    font-size: 8.6pt;
+    line-height: 1.6;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+  .contact strong { color: var(--text); font-weight: 600; }
+  .contact a { color: var(--primary); font-weight: 600; }
+
+  /* ---------- Colonnes ---------- */
+  main { padding: 5mm 8mm 6mm 13mm; }
+  aside {
+    background: var(--sidebar-bg);
+    border-left: 1px solid var(--line);
+    padding: 5mm 9mm 6mm 7mm;
+  }
+
+  h2 {
+    font-size: 9pt;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--primary);
+    padding-bottom: 1.2mm;
+    margin: 4mm 0 2.2mm;
+    border-bottom: 1px solid var(--line);
+  }
+  main > section:first-child h2,
+  aside > section:first-child h2 { margin-top: 0; }
+
+  .summary { color: var(--text); }
+
+  /* ---------- Expériences ---------- */
+  .job { margin-bottom: 2.8mm; break-inside: avoid; }
+  .job-head { display: flex; justify-content: space-between; align-items: baseline; gap: 3mm; }
+  .job-title {
+    font-family: 'Merriweather', Georgia, serif;
+    font-size: 10pt;
+    font-weight: 700;
+  }
+  .job-date {
+    flex-shrink: 0;
+    font-size: 8.2pt;
+    font-weight: 600;
+    color: var(--primary);
+  }
+  .job-company { font-size: 8.8pt; color: var(--muted); margin: 0.2mm 0 0.8mm; }
+  .job-company strong { color: var(--text); font-weight: 600; }
+
+  ul.bullets { list-style: disc; padding-left: 4mm; }
+  ul.bullets li { margin-bottom: 0.4mm; padding-left: 0.5mm; }
+  ul.bullets li::marker { color: var(--primary); }
+  ul.bullets strong { font-weight: 600; }
+
+  /* ---------- Projets ---------- */
+  .project { margin-bottom: 1.8mm; break-inside: avoid; }
+  .project-head { display: flex; justify-content: space-between; align-items: baseline; gap: 3mm; }
+  .project-name { font-weight: 700; font-size: 9.3pt; }
+  .project-link { font-size: 8pt; color: var(--primary); font-weight: 600; white-space: nowrap; }
+  .project p { color: var(--text); }
+  .stack { font-size: 8pt; color: var(--muted); font-style: italic; }
+
+  /* ---------- Sidebar ---------- */
+  .skill-group { margin-bottom: 2.8mm; }
+  .skill-group h3 {
+    font-size: 8.4pt;
+    font-weight: 700;
+    margin-bottom: 1.2mm;
+  }
+  .tags { display: flex; flex-wrap: wrap; gap: 1.2mm; }
+  .tag {
+    font-size: 7.8pt;
+    line-height: 1.3;
+    padding: 0.5mm 1.8mm;
+    border-radius: 2mm;
+    background: var(--primary-container);
+    color: var(--on-primary-container);
+    font-weight: 600;
+  }
+  .tag.soft { background: #fff; border: 1px solid var(--line); color: var(--text); font-weight: 400; }
+
+  .edu { margin-bottom: 3mm; }
+  .edu-title { font-weight: 700; font-size: 8.9pt; line-height: 1.35; }
+  .edu-meta { font-size: 8.2pt; color: var(--muted); }
+  .edu-date { font-size: 8.2pt; color: var(--primary); font-weight: 600; }
+
+  .plain { list-style: none; }
+  .plain li { margin-bottom: 0.8mm; }
+  .plain strong { font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <div>
+      <h1>Frédérick AGATHE</h1>
+      <p class="headline">Développeur Fullstack PHP/Symfony &amp; React</p>
+    </div>
+    <ul class="contact">
+      <li>Le Raincy (93) · Île-de-France</li>
+      <li><strong>06 49 64 01 19</strong></li>
+      <li><a href="mailto:agathefrederick@gmail.com">agathefrederick@gmail.com</a></li>
+      <li><a href="https://frederickagathe.fr">frederickagathe.fr</a></li>
+      <li><a href="https://github.com/fagathe-dev">github.com/fagathe-dev</a> · <a href="https://www.linkedin.com/in/fr%C3%A9d%C3%A9rick-agathe-027553128/">LinkedIn</a></li>
+    </ul>
+  </header>
+
+  <main>
+    <section>
+      <h2>Profil</h2>
+      <p class="summary">
+        Développeur PHP/Symfony avec plus de 5 ans d'expérience en CDI, après 2 ans d'alternance chez CGI.
+        Spécialisé dans la <strong>modernisation d'applications existantes</strong> (montées de version PHP 7&nbsp;→&nbsp;8.3,
+        migration Zend Framework&nbsp;→&nbsp;Symfony&nbsp;6) et à l'aise côté front avec <strong>React et TypeScript</strong>.
+        Attaché à la qualité du code (principes SOLID, tests automatisés, documentation) et à l'outillage (Docker, scripts Node.js).
+      </p>
+    </section>
+
+    <section>
+      <h2>Expérience professionnelle</h2>
+
+      <div class="job">
+        <div class="job-head">
+          <span class="job-title">Développeur d'applications PHP / React</span>
+          <span class="job-date">Déc. 2022 – aujourd'hui</span>
+        </div>
+        <p class="job-company"><strong>Meilleurtaux</strong> · Paris 8ᵉ · CDI</p>
+        <ul class="bullets">
+          <li><strong>Migration PHP 7 → 8.0 puis 8.3</strong> des applications en production.</li>
+          <li>Maintenance évolutive et corrective d'applications <strong>Symfony</strong> et <strong>React</strong> en production (MCO).</li>
+          <li>Mise en place d'<strong>environnements Docker</strong> pour le développement local.</li>
+          <li>Développement de <strong>scripts CLI Node.js</strong> pour automatiser des tâches récurrentes.</li>
+          <li>Rédaction de la documentation technique, suivi des tickets.</li>
+        </ul>
+      </div>
+
+      <div class="job">
+        <div class="job-head">
+          <span class="job-title">Développeur Fullstack PHP/Symfony</span>
+          <span class="job-date">Juil. 2021 – nov. 2022</span>
+        </div>
+        <p class="job-company"><strong>Softia Ingénierie</strong> · Le Kremlin-Bicêtre · CDI</p>
+        <ul class="bullets">
+          <li><strong>Migration d'une application Zend Framework 2.4 vers Symfony 6.</strong></li>
+          <li>Maintenance d'applications PHP sur plusieurs frameworks : Zend Framework, Symfony, Laravel.</li>
+          <li>Réalisation d'<strong>audits techniques</strong> et écriture de <strong>tests automatisés</strong>.</li>
+          <li>Scripts Python et configuration d'environnements sur serveurs Linux Debian.</li>
+        </ul>
+      </div>
+
+      <div class="job">
+        <div class="job-head">
+          <span class="job-title">Développeur Fullstack Python/VueJS</span>
+          <span class="job-date">Janv. 2021 – mars 2021</span>
+        </div>
+        <p class="job-company"><strong>GeretonID</strong> · Paris · Stage</p>
+        <ul class="bullets">
+          <li>Développement d'une <strong>API de blog en Python (Flask)</strong>.</li>
+          <li>Refactorisation du code VueJS, refonte du site (Bootstrap) et affichage de PDF en temps réel.</li>
+        </ul>
+      </div>
+
+      <div class="job">
+        <div class="job-head">
+          <span class="job-title">Développeur PHP/Laravel</span>
+          <span class="job-date">Déc. 2017 – nov. 2019</span>
+        </div>
+        <p class="job-company"><strong>CGI</strong> · Paris · Alternance</p>
+        <ul class="bullets">
+          <li>Tierce maintenance applicative (TMA) d'une application web <strong>PHP/Laravel</strong>.</li>
+          <li>Refonte d'un thème WordPress et rédaction de la documentation utilisateur.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>Projets personnels</h2>
+
+      <div class="project">
+        <div class="project-head">
+          <span class="project-name">Budget App</span>
+          <a class="project-link" href="https://github.com/fagathe-dev/sf-react-p02-budget-app">GitHub ↗</a>
+        </div>
+        <p>Budget partagé pour couples et colocations : répartition des charges communes et calcul du reste à vivre de chacun.</p>
+        <p class="stack">Symfony 8 · PHP 8.4 · React 19 · TypeScript · MySQL · JWT</p>
+      </div>
+
+      <div class="project">
+        <div class="project-head">
+          <span class="project-name">Blog CMS en monorepo</span>
+          <a class="project-link" href="https://github.com/fagathe-dev/sf-react-p03-cms-app">GitHub ↗</a>
+        </div>
+        <p>API REST sécurisée, back-office React avec éditeur par blocs, blog rendu côté serveur pour le SEO. Architecture SOLID.</p>
+        <p class="stack">Symfony · PHP 8.4 · React 19 · TypeScript · Vite · JWT</p>
+      </div>
+
+      <div class="project">
+        <div class="project-head">
+          <span class="project-name">Design System &amp; librairies partagées</span>
+          <a class="project-link" href="https://design-system.frederickagathe.fr">Démo ↗</a>
+        </div>
+        <p>Design system à base de tokens (thème clair/sombre, WCAG AA), bundle Symfony et UI Kit React partagés par mes projets.</p>
+        <p class="stack">SCSS · TypeScript · Twig · Storybook · Vitest · PHPUnit</p>
+      </div>
+    </section>
+  </main>
+
+  <aside>
+    <section>
+      <h2>Compétences</h2>
+
+      <div class="skill-group">
+        <h3>Back-end</h3>
+        <div class="tags">
+          <span class="tag">PHP 8</span><span class="tag">Symfony</span><span class="tag">Doctrine</span>
+          <span class="tag">API REST</span><span class="tag">JWT</span><span class="tag">Laravel</span>
+          <span class="tag">Zend Framework</span><span class="tag">PHPUnit</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <h3>Front-end</h3>
+        <div class="tags">
+          <span class="tag">TypeScript</span><span class="tag">JavaScript</span><span class="tag">React</span>
+          <span class="tag">Next.js</span><span class="tag">VueJS</span><span class="tag">Twig</span>
+          <span class="tag">SCSS</span><span class="tag">HTML / CSS</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <h3>Données &amp; DevOps</h3>
+        <div class="tags">
+          <span class="tag">MySQL</span><span class="tag">PostgreSQL</span><span class="tag">Docker</span>
+          <span class="tag">Git</span><span class="tag">Linux Debian</span><span class="tag">Node.js</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <h3>Aussi</h3>
+        <div class="tags">
+          <span class="tag soft">Python / Flask</span><span class="tag soft">SEO</span>
+          <span class="tag soft">Claude Code</span><span class="tag soft">Prompting</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <h3>Méthodes</h3>
+        <div class="tags">
+          <span class="tag soft">SOLID</span><span class="tag soft">Tests automatisés</span>
+          <span class="tag soft">Migrations legacy</span><span class="tag soft">Audit technique</span>
+          <span class="tag soft">Documentation</span>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Formation</h2>
+
+      <div class="edu">
+        <p class="edu-title">Développeur d'application PHP/Symfony</p>
+        <p class="edu-meta">OpenClassrooms · Titre RNCP niveau 6 (Bac+3/4)</p>
+        <p class="edu-date">2021</p>
+      </div>
+
+      <div class="edu">
+        <p class="edu-title">BTS Technicien Systèmes, Réseaux et Sécurité</p>
+        <p class="edu-meta">IPI Paris · Bac+2 · en alternance chez CGI</p>
+        <p class="edu-date">2019</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Langues</h2>
+      <ul class="plain">
+        <li><strong>Français</strong> : langue maternelle</li>
+        <li><strong>Anglais</strong> : technique (lu, écrit)</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Infos</h2>
+      <ul class="plain">
+        <li>Permis B</li>
+      </ul>
+    </section>
+  </aside>
+
+</div>
+</body>
+</html>

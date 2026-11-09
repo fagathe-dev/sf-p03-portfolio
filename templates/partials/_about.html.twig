@@ -1,41 +1,61 @@
 {# --- À propos ---------------------------------------------------------------- #}
 
-<div class="about">
+<div class="about-grid">
 
-  <div class="about__content">
-    <div class="about__bio">{{ profile.bio|raw }}</div>
+  <figure class="about-portrait">
+    <img
+      src="{{ asset('images/portrait-640.webp') }}"
+      srcset="
+        {{ asset('images/portrait-640.webp') }} 640w,
+        {{ asset('images/portrait-1080.webp') }} 1080w
+      "
+      sizes="(min-width: 992px) 480px, (min-width: 576px) 540px, 100vw"
+      alt="Portrait de {{ profile.fullName }}"
+      class="about-portrait-img"
+      width="1080"
+      height="1350"
+      loading="lazy"
+      decoding="async"
+    />
+  </figure>
 
-    <div class="about__actions">
+  <div class="about-content">
+    <div class="about-bio">{{ profile.bio|raw }}</div>
+
+    <div class="about-actions">
       <a
         href="{{ url('app_home_download_resume') }}"
-        class="btn btn--primary"
+        class="btn btn-primary"
         aria-label="Télécharger le CV de {{ profile.fullName }}"
-      >Télécharger le CV</a>
+      >
+        <i class="ri-download-2-line" aria-hidden="true"></i>
+        Télécharger le CV
+      </a>
       <a
         href="#contact"
-        class="btn btn--outline"
+        class="btn btn-outline-primary"
         aria-label="Aller à la section contact"
       >Me contacter</a>
     </div>
   </div>
 
   {# ── Chiffres clés ── #}
-  <aside class="about__stats" aria-label="Chiffres clés">
-    <div class="about__stat">
-      <span class="about__stat-value">5+</span>
-      <span class="about__stat-label">Ans d'expérience</span>
+  <aside class="about-stats" aria-label="Chiffres clés">
+    <div class="stat-card">
+      <span class="stat-value">5+</span>
+      <span class="stat-label">Ans d'expérience</span>
     </div>
-    <div class="about__stat">
-      <span class="about__stat-value">{{ projects|length }}+</span>
-      <span class="about__stat-label">Projets réalisés</span>
+    <div class="stat-card">
+      <span class="stat-value">{{ projects|length }}+</span>
+      <span class="stat-label">Projets réalisés</span>
     </div>
-    <div class="about__stat">
-      <span class="about__stat-value">{{ skills|length }}</span>
-      <span class="about__stat-label">Technologies</span>
+    <div class="stat-card">
+      <span class="stat-value">{{ skills|length }}</span>
+      <span class="stat-label">Technologies</span>
     </div>
-    <div class="about__stat">
-      <span class="about__stat-value">{{ profile.location }}</span>
-      <span class="about__stat-label">Localisation</span>
+    <div class="stat-card">
+      <span class="stat-value">{{ profile.location }}</span>
+      <span class="stat-label">Localisation</span>
     </div>
   </aside>
 

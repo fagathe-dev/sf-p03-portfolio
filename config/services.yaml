@@ -27,8 +27,12 @@ services:
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
     
-    Fagathe\CorePhp\:
-        resource: '../vendor/fagathe-dev/core-php/src/'
+    # core-php : CorePhpBundle (config/bundles.php) déclare ses propres services
+    # (logger, uploader, mailer, commandes) avec leurs paramètres. Ne pas réimporter
+    # tout vendor/fagathe-dev/core-php/src/ ici : ce fichier étant chargé après le
+    # bundle, ses définitions écraseraient celles du bundle (paramètres perdus).
+    # On ne déclare que ce que le bundle n'expose pas et que le portfolio utilise.
+    Fagathe\CorePhp\File\JsonFileHandler: ~
 
     Fagathe\CorePhp\Twig\:
         tags: ['twig.extension']
@@ -38,9 +42,11 @@ services:
         tags:
             - { name: 'validator.constraint_validator' }
 
-    App\Service\Mail\ContactMailer:
-        arguments:
-            $ownerEmail:  '%env(MAILER_OWNER_ADDRESS)%'
-            $ownerName:   '%env(MAILER_DEFAULT_NAME_SENDER)%'
-            $senderEmail: '%env(MAILER_ADDRESS_SENDER)%'
-            $senderName:  '%env(MAILER_APP_SENDER_NAME)%'
+    # E-mails : handlers App\Mail\* (AbstractMailerHandler de core-php), autowirés.
+    # Configuration par les variables lues par core-php (cf. .env) : DEFAULT_EMAIL_SENDER,
+    # SUPPORT_EMAIL (destinataire des messages de contact), APP_NAME, DEFAULT_URI, LOGO_PATH.
+
+# Pas de contrôle DNS des destinataires en test (hors ligne, domaines fictifs)
+when@test:
+    parameters:
+        core_php.email.check_deliverability: false

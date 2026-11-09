@@ -1,33 +1,33 @@
 {# --- Contact ------------------------------------------------------------------ #}
 
-<div class="contact">
+<div class="contact-section">
 
-  <div class="contact__intro">
-    <p class="contact__text">
+  <div class="contact-intro">
+    <p class="contact-text">
       Une opportunité, un projet, ou simplement envie d'échanger ?
       Envoyez-moi un message — je réponds rapidement.
     </p>
   </div>
 
-  <div class="contact__layout">
+  <div class="contact-layout">
 
     {# ── Formulaire ── #}
     <form
       id="contact-form"
-      class="contact__form"
+      class="contact-form"
       novalidate
       aria-label="Formulaire de contact"
       data-action="{{ path('app_home_contact') }}"
     >
 
       {# ── Ligne nom + téléphone ── #}
-      <div class="contact__row">
+      <div class="contact-row">
 
         {# fullName #}
-        <div class="contact__field mb-3">
+        <div class="contact-field">
           <label for="contact-fullName" class="form-label">
             Nom complet
-            <span class="contact__required" aria-hidden="true">*</span>
+            <span class="contact-required" aria-hidden="true">*</span>
           </label>
           <input
             type="text"
@@ -43,10 +43,10 @@
         </div>
 
         {# phone #}
-        <div class="contact__field mb-3">
+        <div class="contact-field">
           <label for="contact-phone" class="form-label">
             Téléphone
-            <span class="contact__optional">(optionnel)</span>
+            <span class="contact-optional">(optionnel)</span>
           </label>
           <input
             type="tel"
@@ -57,17 +57,17 @@
             aria-describedby="contact-phone-error contact-phone-hint"
             placeholder="06 12 34 56 78"
           />
-          <small id="contact-phone-hint" class="contact__hint">Format français — ex : 06 12 34 56 78</small>
+          <small id="contact-phone-hint" class="contact-hint">Format français — ex : 06 12 34 56 78</small>
           <small id="contact-phone-error" class="invalid-feedback" role="alert" aria-live="polite"></small>
         </div>
 
       </div>
 
       {# email #}
-      <div class="contact__field mb-3">
+      <div class="contact-field">
         <label for="contact-email" class="form-label">
           Adresse email
-          <span class="contact__required" aria-hidden="true">*</span>
+          <span class="contact-required" aria-hidden="true">*</span>
         </label>
         <input
           type="email"
@@ -83,10 +83,10 @@
       </div>
 
       {# subject #}
-      <div class="contact__field mb-3">
+      <div class="contact-field">
         <label for="contact-subject" class="form-label">
           Motif du contact
-          <span class="contact__required" aria-hidden="true">*</span>
+          <span class="contact-required" aria-hidden="true">*</span>
         </label>
         <select
           id="contact-subject"
@@ -108,13 +108,13 @@
       {# link_proposition — conditionnel (job_offer | project_proposition) #}
       <div
         id="contact-link-wrapper"
-        class="contact__field contact__field--conditional mb-3"
+        class="contact-field"
         aria-hidden="true"
         hidden
       >
         <label for="contact-link" class="form-label">
           Lien de l'offre / du projet
-          <span class="contact__required" aria-hidden="true">*</span>
+          <span class="contact-required" aria-hidden="true">*</span>
         </label>
         <input
           type="url"
@@ -128,10 +128,10 @@
       </div>
 
       {# message #}
-      <div class="contact__field mb-3">
+      <div class="contact-field">
         <label for="contact-message" class="form-label">
           Message
-          <span class="contact__required" aria-hidden="true">*</span>
+          <span class="contact-required" aria-hidden="true">*</span>
         </label>
         <textarea
           id="contact-message"
@@ -147,7 +147,7 @@
       </div>
 
       {# Consentement RGPD — checkbox obligatoire #}
-      <div class="contact__field contact__field--consent mb-3">
+      <div class="contact-field">
         <div class="form-check">
           <input
             type="checkbox"
@@ -159,13 +159,13 @@
             aria-describedby="contact-consent-error"
             value="1"
           />
-          <label for="contact-consent" class="form-check-label contact__consent-label">
+          <label for="contact-consent" class="form-check-label contact-consent-label">
             J'accepte que mes données soient utilisées dans le cadre d'une tentative
             de contact et ne seront pas transmises à des tiers.
-            En savoir plus 
+            En savoir plus
             <a
               href="{{ path('app_home_legal') }}#politique-de-donnees"
-              class="contact__consent-link"
+              class="link-primary"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="En savoir plus sur l'utilisation des données (ouvre un nouvel onglet)"
@@ -176,13 +176,14 @@
       </div>
 
       {# Submit #}
-      <div class="contact__submit">
+      <div class="contact-submit">
         <button
           type="submit"
           id="contact-submit"
-          class="btn btn--primary"
+          class="btn btn-primary"
           aria-label="Envoyer le message de contact"
         >
+          <i class="ri-send-plane-line" aria-hidden="true"></i>
           Envoyer le message
         </button>
       </div>
@@ -190,7 +191,7 @@
       {# Feedback global #}
       <div
         id="contact-feedback"
-        class="contact__feedback"
+        class="contact-feedback"
         role="status"
         aria-live="polite"
         aria-atomic="true"
@@ -199,7 +200,7 @@
     </form>
 
     {# ── Informations de contact ── #}
-    <aside class="contact__info" aria-label="Informations de contact">
+    <aside class="contact-info" aria-label="Informations de contact">
       {% for social in profile.socials %}
         {% set finalLink = social.link %}
         {% if social.presetMessage is defined %}
@@ -212,7 +213,7 @@
 
         <a
           href="{{ finalLink }}"
-          class="contact__social-link"
+          class="contact-social-link"
           aria-label="{{ social.name }}"
           {% if not (social.link starts with 'mailto') %}
             target="_blank"
@@ -224,9 +225,9 @@
         </a>
       {% endfor %}
 
-      <p class="contact__location">
+      <p class="contact-location">
         <i class="mdi mdi-map-marker" aria-hidden="true"></i>
-        {{ profile.location }}
+        <span>{{ profile.location }}</span>
       </p>
     </aside>
 

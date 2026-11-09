@@ -1,64 +1,105 @@
 {# --- Projets ------------------------------------------------------------------ #}
 
-<div class="projects">
-  <ul class="projects__grid" aria-label="Liste des projets">
-    {% for project in projects %}
-      <li class="project-card">
+<ul class="projects-grid" aria-label="Liste des projets">
+  {% for project in projects %}
+    <li class="card card-elevated project-card">
 
-        {% if project.thumbnail %}
-          <div class="project-card__thumbnail" aria-hidden="true">
-            <img
-              src="{{ asset(project.thumbnail) }}"
-              alt="{{ project.name }}"
-              class="project-card__img"
-              width="600"
-              height="340"
-              loading="lazy"
-            />
-          </div>
-        {% endif %}
-
-        <div class="project-card__body">
-
-          <div class="project-card__meta">
-            <span class="project-card__date">{{ project.date }}</span>
-          </div>
-
-          <h3 class="project-card__name">{{ project.name }}</h3>
-          <p class="project-card__excerpt">{{ project.excerpt }}</p>
-
-          <ul class="project-card__stack" aria-label="Stack technique de {{ project.name }}">
-            {% for tech in project.stack %}
-              <li class="project-card__tag">{{ tech }}</li>
-            {% endfor %}
-          </ul>
-
-          <div class="project-card__actions">
-            {% if project.github %}
-              <a
-                href="{{ project.github }}"
-                class="btn btn--outline btn--sm"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Voir le code source de {{ project.name }} sur GitHub"
-              >
-                <i class="mdi mdi-github" aria-hidden="true"></i>
-                Code source
-              </a>
-            {% endif %}
-            {% if project.live_link %}
-              <a
-                href="{{ project.live_link }}"
-                class="btn btn--primary btn--sm"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Voir la démo en ligne de {{ project.name }}"
-              >Voir le projet</a>
-            {% endif %}
-          </div>
-
+      {% if project.thumbnail %}
+        <div class="project-thumbnail" aria-hidden="true">
+          <img
+            src="{{ asset(project.thumbnail) }}"
+            alt="{{ project.name }}"
+            class="project-img"
+            width="600"
+            height="340"
+            loading="lazy"
+          />
         </div>
-      </li>
-    {% endfor %}
-  </ul>
-</div>
+      {% endif %}
+
+      <div class="card-body">
+
+        <div class="project-meta">
+          <span class="project-date">{{ project.date }}</span>
+        </div>
+
+        <h3 class="card-title">{{ project.name }}</h3>
+        <p class="project-excerpt">{{ project.excerpt }}</p>
+
+        <ul class="project-stack" aria-label="Stack technique de {{ project.name }}">
+          {% for tech in project.stack %}
+            <li class="chip chip-sm">{{ tech }}</li>
+          {% endfor %}
+        </ul>
+
+      </div>
+
+      <div class="project-actions">
+        <button
+          type="button"
+          class="btn btn-soft-primary btn-sm"
+          data-ds-toggle="modal"
+          data-ds-target="#project-modal-{{ project.slug }}"
+          aria-haspopup="dialog"
+          aria-controls="project-modal-{{ project.slug }}"
+          aria-label="Voir les détails du projet {{ project.name }}"
+        >
+          <i class="ri-information-line" aria-hidden="true"></i>
+          Détails
+        </button>
+        {% include 'partials/_project_links.html.twig' with { project: project } only %}
+      </div>
+
+    </li>
+  {% endfor %}
+</ul>
+
+{# --- Modales de détail (une par projet, hors de la grille) -------------------- #}
+{% for project in projects %}
+  <dialog
+    id="project-modal-{{ project.slug }}"
+    class="modal project-modal"
+    aria-labelledby="project-modal-{{ project.slug }}-title"
+  >
+    <div class="modal-header">
+      <h3 class="modal-title" id="project-modal-{{ project.slug }}-title">{{ project.name }}</h3>
+      <button type="button" class="btn-close" data-ds-dismiss="modal" aria-label="Fermer"></button>
+    </div>
+
+    <div class="modal-body project-modal-body">
+
+      {% if project.thumbnail %}
+        <img
+          src="{{ asset(project.thumbnail) }}"
+          alt="Capture d'écran du projet {{ project.name }}"
+          class="project-modal-img"
+          width="1200"
+          height="675"
+          loading="lazy"
+          decoding="async"
+        />
+      {% endif %}
+
+      <div class="project-modal-meta">
+        <span class="project-date">
+          <i class="ri-calendar-line" aria-hidden="true"></i>
+          {{ project.date }}
+        </span>
+        <ul class="project-stack" aria-label="Stack technique de {{ project.name }}">
+          {% for tech in project.stack %}
+            <li class="chip chip-sm">{{ tech }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      {# Markdown converti par le Design System (main.js) : contenu issu de data/projects.json #}
+      <div class="project-description" data-markdown>{{ project.description }}</div>
+
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-ghost-secondary btn-sm" data-ds-dismiss="modal">Fermer</button>
+      {% include 'partials/_project_links.html.twig' with { project: project } only %}
+    </div>
+  </dialog>
+{% endfor %}
