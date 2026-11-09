@@ -413,7 +413,7 @@ html {
 .stat-value {
   color: var(--stat-value-color);
   font-family: var(--ds-font-mono);
-  @include type(headline, md);
+  @include type(headline, xs);
   font-weight: var(--ds-font-weight-bold);
 }
 
