@@ -48,8 +48,8 @@
     "excerpt": "Socle Symfony + React réutilisable : authentification JWT, compte, e-mails, logs et UI Kit, prêt à cloner.",
     "date": "10/2026",
     "github": "https://github.com/fagathe-dev/sf-react-p01-base-app",
-    "live_link": null,
-    "live_label": null
+    "live_link": "https://base-app.frederickagathe.fr",
+    "live_label": "Essayer"
   },
   {
     "id": "pjt-5",
@@ -61,8 +61,8 @@
     "excerpt": "API REST de données factices façon JSONPlaceholder, avec écritures simulées et documentation interactive.",
     "date": "11/2026",
     "github": "https://github.com/fagathe-dev/sf-p06-apiplaceholder",
-    "live_link": null,
-    "live_label": null
+    "live_link": "https://api-placeholder.frederickagathe.fr",
+    "live_label": "Essayer"
   },
   {
     "id": "pjt-6",
